@@ -25,19 +25,29 @@ public class UsuarioServices {
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Transactional
-    public void crearAdmin(){
+    public void crearAdmin() {
 
-        Rol rol =new Rol("ROLE_ADMIN");
-        rolRepository.save(rol);
+        if (buscarAdmin()) {
+
+            Rol rol = new Rol("ROLE_ADMIN");
+            rolRepository.save(rol);
 
 
-        Usuario admin = new Usuario();
-        admin.setNombre("admin");
-        admin.setUsuario("admin");
-        admin.setPassword(bCryptPasswordEncoder.encode("admin"));
-        admin.setActivo(true);
-        admin.setRolSet(new HashSet<>(Arrays.asList(rol)));
+            Usuario admin = new Usuario();
+            admin.setNombre("admin");
+            admin.setUsuario("admin");
+            admin.setPassword(bCryptPasswordEncoder.encode("admin"));
+            admin.setActivo(true);
+            admin.setRolSet(new HashSet<>(Arrays.asList(rol)));
 
-        usuarioRepository.save(admin);
+            usuarioRepository.save(admin);
+        }
+
+    }
+
+    private boolean buscarAdmin() {
+
+        Usuario usuario = usuarioRepository.findFirstByRolSetEquals(new HashSet<>(Arrays.asList(rolRepository.findByNombre("Rol"))));
+        return usuario != null;
     }
 }
