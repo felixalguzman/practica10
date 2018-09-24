@@ -16,14 +16,23 @@ public class Usuario implements Serializable {
 
     private String nombre;
 
+    private String usuario;
+
+    private String password;
+
+    private boolean activo;
+
     @OneToMany
     private Set<Rol> rolSet;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, Set<Rol> rolSet) {
+    public Usuario(String nombre, String usuario, String password, boolean activo, Set<Rol> rolSet) {
         this.nombre = nombre;
+        this.usuario = usuario;
+        this.password = password;
+        this.activo = activo;
         this.rolSet = rolSet;
     }
 
@@ -49,5 +58,29 @@ public class Usuario implements Serializable {
 
     public void setRolSet(Set<Rol> rolSet) {
         this.rolSet = rolSet;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }
