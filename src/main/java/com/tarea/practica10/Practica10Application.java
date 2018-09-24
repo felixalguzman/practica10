@@ -1,5 +1,6 @@
 package com.tarea.practica10;
 
+import com.tarea.practica10.config.ConfiguracionSeguridad;
 import com.tarea.practica10.entidades.Usuario;
 import com.tarea.practica10.servicios.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class Practica10Application {
 
         UsuarioServices usuarioServices = (UsuarioServices) applicationContext.getBean("usuarioServices");
         usuarioServices.crearAdmin();
+
+
 
 
 
