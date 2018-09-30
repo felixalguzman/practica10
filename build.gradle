@@ -35,6 +35,9 @@ dependencies {
     testCompile('org.springframework.security:spring-security-test')
     
     //Plantilla
+
+    	//Trabajando con FreeMarker...
+	compile('org.springframework.boot:spring-boot-starter-freemarker')
     
     compile 'org.webjars:AdminLTE:2.4.3'
     compile 'org.webjars:font-awesome:4.7.0'

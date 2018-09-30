@@ -10,9 +10,9 @@ tiene cada uno de los equipos. Dado el escenario planteado realice:
 
 
 1. El sistema utilizará como motor de base de datos H2, utilizando ORM bajo JPA.
-Una vez inicializado el sistema se debe crear un usuario administrador, el cual será
+Una vez inicializado el sistema se debe crear un username administrador, el cual será
 el único que podrá crear usuarios nuevos y asignar roles de permisos a dicho
-usuario.
+username.
 2. El sistema debe permitir administrar los clientes, la cual debe tener la información
 básica siendo obligatorio indicar la cédula y la opción de subir una foto del cliente.
 3. El sistema debe permitir administrar los equipos que serán alquilados, un equipo

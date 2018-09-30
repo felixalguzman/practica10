@@ -36,7 +36,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form th:action="@{/login}" method="POST" class="form-signin">
+        <form action="/login" method="POST" class="form-signin">
             <div class="form-group has-feedback">
                 <input name="username" id="username"  class="form-control" placeholder="Usuario">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>

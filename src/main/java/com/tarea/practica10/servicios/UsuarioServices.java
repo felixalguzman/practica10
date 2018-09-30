@@ -5,15 +5,19 @@ import com.tarea.practica10.entidades.Usuario;
 import com.tarea.practica10.repositorio.RolRepository;
 import com.tarea.practica10.repositorio.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 @Service
-public class UsuarioServices {
+public class UsuarioServices implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -24,6 +28,9 @@ public class UsuarioServices {
     //Para encriptar la información.
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
+    /**
+     * Funcion para crear administrador
+     */
     @Transactional
     public void crearAdmin() {
 
@@ -47,7 +54,22 @@ public class UsuarioServices {
 
     private boolean buscarAdmin() {
 
-        Usuario usuario = usuarioRepository.findFirstByRolSetEquals(new HashSet<>(Arrays.asList(rolRepository.findByNombre("Rol"))));
+        Usuario usuario = usuarioRepository.findByNombreAndPassword("admin",bCryptPasswordEncoder.encode("admin") );
         return usuario != null;
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario user = usuarioRepository.findByUsuario(username);
+
+        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+        for (Rol role : user.getRolSet()) {
+            roles.add(new SimpleGrantedAuthority(role.getNombre()));
+        }
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+
+        return new org.springframework.security.core.userdetails.User(user.getUsuario(), user.getPassword(), user.isActivo(), true, true, true, grantedAuthorities);
     }
 }
