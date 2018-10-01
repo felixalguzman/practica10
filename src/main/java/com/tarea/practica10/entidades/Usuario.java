@@ -1,9 +1,6 @@
 package com.tarea.practica10.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -22,7 +19,7 @@ public class Usuario implements Serializable {
 
     private boolean activo;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Rol> rolSet;
 
     public Usuario() {

@@ -34,7 +34,7 @@ public class UsuarioServices implements UserDetailsService {
     @Transactional
     public void crearAdmin() {
 
-        if (buscarAdmin()) {
+        if (!buscarAdmin()) {
 
             Rol rol = new Rol("ROLE_ADMIN");
             rolRepository.save(rol);
@@ -51,17 +51,24 @@ public class UsuarioServices implements UserDetailsService {
         }
 
     }
-
+    /**
+     * Funcion para revisar si el admin existe.
+     */
     private boolean buscarAdmin() {
 
-        Usuario usuario = usuarioRepository.findByNombreAndPassword("admin",bCryptPasswordEncoder.encode("admin") );
-        return usuario != null;
+        Rol rol = rolRepository.findByNombre("ROLE_ADMIN");
+        if (rol == null){
+
+            return false;
+        }
+
+        return true;
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = usuarioRepository.findByUsuario(username);
+        Usuario user = usuarioRepository.findByNombre(username);
 
         Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
         for (Rol role : user.getRolSet()) {
