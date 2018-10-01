@@ -65,6 +65,12 @@ public class UsuarioServices implements UserDetailsService {
         return true;
     }
 
+    public List<Usuario> obtenerUsuarios() {
+
+        return usuarioRepository.findAllByActivo(true);
+        
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

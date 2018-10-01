@@ -1,11 +1,10 @@
 package com.tarea.practica10.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 public class Rol implements Serializable {
