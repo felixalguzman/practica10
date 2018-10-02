@@ -46,26 +46,57 @@
         <#include "segmentos/nav.ftl">
             <!-- /.content-wrapper -->
 
+
+
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
+
+                <section class="content-header">
+                    <h1>
+                        Usuarios
+
+                    </h1>
+
+                </section>
+
+
                 <#-- Main content -->
                     <section class="content">
 
-                        <table id="tabla" class="display" style="width:100%">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Usuarios</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                            data-target="#modal-default">
+                                            <i class="fa fa-plus-square"></i> Crear
+                                        </button>
 
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Usuario</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Usuario</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                        <br>
+                                        <table id="tabla" class="display" style="width:100%">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Usuario</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Usuario</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
 
 
@@ -273,6 +304,57 @@
          immediately after the control sidebar -->
             <div class="control-sidebar-bg"></div>
 
+
+    </div>
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Nuevo Usuario</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" name="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="usuario">Usuario</label>
+                                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario"
+                                    required>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Contraseña</label>
+                                <input type="password" class="form-control" name="password" id="exampleInputPassword1"
+                                    placeholder="Contraseña">
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+
+                        <!-- <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="guardar" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- /.modal-dialog -->
+    </div> -->
     </div>
     <!-- ./wrapper -->
 
@@ -280,6 +362,7 @@
 
         $(document).ready(function () {
 
+            alert("funciona");
             let nuevo = [];
 
 
@@ -315,6 +398,12 @@
             tabla.columns.adjust().draw();
 
             actualizarTabla();
+
+            $("#guardar").on("click", function () {
+
+                alert("guardando usuario");
+
+            })
 
         })
 

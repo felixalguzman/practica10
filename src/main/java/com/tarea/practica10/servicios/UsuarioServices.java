@@ -71,6 +71,12 @@ public class UsuarioServices implements UserDetailsService {
         
     }
 
+    @Transactional
+    public void guardarUsuario(Usuario usuario) {
+
+        usuarioRepository.save(usuario);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
