@@ -16,6 +16,8 @@ public class RutasController {
         return "/freemarker/index";
     }
 
+ 
+
     
 
 

@@ -323,6 +323,7 @@
                     </span> -->
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="/index/clientes"><i class="fa fa-user"></i> Clientes</a></li>
                     <li><a href="/index/usuarios"><i class="fa fa-user"></i> Usuarios</a></li>
                     <li><a href="/"><i class="fa fa-circle-o"></i> Roles</a></li>
                     <!-- <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>

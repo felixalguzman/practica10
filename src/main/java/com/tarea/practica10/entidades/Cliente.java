@@ -1,5 +1,6 @@
 package com.tarea.practica10.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,11 +18,12 @@ public class Cliente implements Serializable {
     private String nombre;
 
     private String cedula;
-
+    @Column(nullable = true)
     private int telefono;
-
+    @Column(nullable = true)
     private String correo;
 
+    @Column(nullable = true)
     private String foto;
 
     @OneToMany

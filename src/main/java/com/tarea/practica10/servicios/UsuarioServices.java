@@ -51,6 +51,13 @@ public class UsuarioServices implements UserDetailsService {
         }
 
     }
+
+    public void eliminarUsuario(long id) {
+        
+        Usuario usuario = usuarioRepository.findById(id);
+
+        usuarioRepository.delete(usuario);
+    }
     /**
      * Funcion para revisar si el admin existe.
      */

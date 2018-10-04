@@ -60,7 +60,7 @@
 
                 <section class="content-header">
                     <h1>
-                        Usuarios
+                        Clientes
 
                     </h1>
 
@@ -74,7 +74,7 @@
                             <div class="col-xs-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Usuarios</h3>
+                                        <h3 class="box-title">Clientes</h3>
                                     </div>
                                     <div class="box-body">
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
@@ -87,17 +87,20 @@
 
                                             <thead>
                                                 <tr>
+                                                    <th>Cedula</th>
                                                     <th>Nombre</th>
-                                                    <th>Usuario</th>
+                                                    <th>Telefono</th>
+                                                    <th>Correo</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
+                                                    <th>Cedula</th>
                                                     <th>Nombre</th>
-                                                    <th>Usuario</th>
+                                                    <th>Telefono</th>
+                                                    <th>Correo</th>
                                                     <th>Acciones</th>
-
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -320,37 +323,41 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Nuevo Usuario</h4>
+                    <h4 class="modal-title">Nuevo Cliente</h4>
                 </div>
                 <form id="form" method="POST">
                     <div class="modal-body">
 
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="usuario">Usuario</label>
-                                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario"
-                                    required>
-
-                                <input type="checkbox" value="checked" hidden name="activo">
-
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
+                                <label for="cedula">Cedula</label>
+                                <input type="text" name="cedula" class="form-control" id="cedula" placeholder="Cedula"
                                     required>
                             </div>
 
                             <div class="form-group">
-                                <label for="permisos">Permisos</label>
-                                <select name="permisos" style="width: 100%" class="form-control" id="permisos" required
-                                    multiple="multiple">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                                        required>
+                                </div>
+                                
+                            <div class="form-group">
+                                <label for="telefono">Telefono</label>
+                                <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="Telefono"
+                                    required>
 
-                                </select>
+                                
+
+                            </div>
+                            <div class="form-group">
+                                <label for="correo">Correo</label>
+                                <input type="email" class="form-control" name="correo" id="correo" placeholder="Correo"
+                                    >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="foto">Foto</label>
+                               <input type="file" name="foto" id="foto">
                             </div>
 
                         </div>
@@ -394,7 +401,7 @@
 
                 e.preventDefault();
                 // e.stopPropagation();
-                crearUsuario();
+                crearCliente();
 
 
 
@@ -408,70 +415,30 @@
 
 
 
-            buscarUsuarios();
+            buscarClientes();
 
 
-            cargarRoles();
+
 
 
         });
 
-        function cargarRoles() {
-
-            $('#permisos').select2({
-
-                width: 'resolve',
-                placeholder: 'Roles',
-                allowClear: true,
-                ajax: {
-                    url: "/roles",
-                    processResults: function (data) {
-
-                        data = data.map(function (item) {
-                            return {
-                                id: item.id,
-                                text: item.nombre,
-                                // otherfield: item.otherfield
-                            };
-                        });
-                        return { results: data };
-                    },
-                }
-
-            });
-
-        }
-
-        function generarRol(rol) {
-
-            let formato = [];
-
-
-            formato.push({
-                id: rol.id,
-                text: rol.nombre
-            })
-
-
-
-            return JSON.parse(formato);
-
-        }
-
-        function buscarUsuarios() {
+      
+        function buscarClientes() {
 
             let nuevo = [];
             $.ajax({
                 dataType: 'json',
-                url: '/usuarios',
+                url: '/clientes',
                 success: function (data) {
 
-                    data.forEach(function (usuario) {
+                    data.forEach(function (cliente) {
 
                         nuevo.push({
-                            id: usuario.id,
-                            nombre: usuario.nombre,
-                            usuario: usuario.usuario
+                            cedula:cliente.cedula,
+                            nombre: cliente.nombre,
+                            telefono: cliente.telefono,
+                            correo: cliente.correo
                         });
 
                     });
@@ -498,8 +465,10 @@
                 dom: 'Bfrtip',
                 data: json,
                 columns: [
-                    { targets: 0, data: 'nombre' },
-                    { targets: 1, data: 'usuario' },
+                    { targets: 0, data: 'cedula' },
+                    { targets: 1, data: 'nombre' },
+                    { targets: 1, data: 'telefono' },
+                    { targets: 1, data: 'correo', "defaultContent": "<i>Not set</i>" },
                     {
                         targets: -1,
                         data: 'id',
@@ -530,49 +499,19 @@
 
         }
 
-        function eliminar(id) {
-            
-
-            let num = id.replace('eliminar_', '');
-            console.log("id: " + num);
-            
-            $.ajax({
-                type: 'POST',
-                url: '/usuario/eliminar/'+num,
-                success: function () {
-
-                    actualizarTabla();
-                    // $('#modal-default').modal('toggle');
-                }
-            });
-
-        }
-
-        function crearUsuario() {
+        function crearCliente() {
 
 
             let json = []
 
-            console.log($("#permisos").val());
-            let rol = [];
-            // $("#permisos").val().forEach(function (id) {
-
-            //     rol.push({
-            //         id: id
-            //     })
-            // });
-
-            console.log(rol);
-
-
-
-
 
             json.push({
+                cedula: $("#cedula").val(),
                 nombre: $("#nombre").val(),
-                usuario: $("#usuario").val(),
-                password: $("#password").val(),
-                activo: true
+                correo: $("#correo").val(),
+                foto: $("#foto").val(),
+                telefono: $("#telefono").val(),
+                
             });
 
 
@@ -582,7 +521,7 @@
                 type: 'POST',
                 data: JSON.stringify(json),
                 contentType: "application/json",
-                url: '/usuario/crear',
+                url: '/clientes/crear',
                 success: function () {
 
                     actualizarTabla();
