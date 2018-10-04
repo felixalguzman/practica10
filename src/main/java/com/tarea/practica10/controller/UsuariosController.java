@@ -2,7 +2,6 @@ package com.tarea.practica10.controller;
 
 import java.util.List;
 
-import com.tarea.practica10.entidades.Rol;
 import com.tarea.practica10.entidades.Usuario;
 import com.tarea.practica10.servicios.RolServices;
 import com.tarea.practica10.servicios.UsuarioServices;
@@ -10,6 +9,7 @@ import com.tarea.practica10.servicios.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +29,9 @@ public class UsuariosController {
     @Autowired
     RolServices rolServices;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+
     @RequestMapping("/index/usuarios")
     public String index(Model model) {
         model.addAttribute("titulo", "Usuarios");
@@ -45,11 +48,15 @@ public class UsuariosController {
     }
 
     @RequestMapping(value = "/usuario/crear", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<List<Usuario>> crearUsuario(@RequestBody List<Usuario> usuarioList) {
 
-        usuariosServices.guardarUsuario(usuario);
+        for (Usuario usuario : usuarioList) {
+            
+            usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
+            usuariosServices.guardarUsuario(usuario);
+        }
 
-        return new ResponseEntity<>(usuario, HttpStatus.OK);
+        return new ResponseEntity<>(usuarioList, HttpStatus.OK);
     }
 
 

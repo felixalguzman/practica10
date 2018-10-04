@@ -2,6 +2,7 @@ package com.tarea.practica10;
 
 import com.tarea.practica10.servicios.UsuarioServices;
 
+import org.springframework.beans.BeansException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -14,8 +15,14 @@ public class Practica10Application {
         ApplicationContext applicationContext = SpringApplication.run(Practica10Application.class, args);
 
 
-        UsuarioServices usuarioServices = (UsuarioServices) applicationContext.getBean("usuarioServices");
-        usuarioServices.crearAdmin();
+        UsuarioServices usuarioServices;
+        try {
+            usuarioServices = (UsuarioServices) applicationContext.getBean("usuarioServices");
+            usuarioServices.crearAdmin();
+
+        } catch (BeansException e) {
+            e.printStackTrace();
+        }
 
 
 

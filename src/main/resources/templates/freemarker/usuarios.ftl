@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/custom.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/webjars/AdminLTE/2.4.0/dist/css/AdminLTE.min.css">
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -30,14 +31,17 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.5.0/css/colReorder.dataTables.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="../SemanticUI-2.2.13/semantic.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="../DataTables-1.10.18/css/dataTables.jqueryui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Responsive-2.2.2/css/responsive.semanticui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Select-1.2.6/css/select.semanticui.min.css" />
 
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.0/js/dataTables.colReorder.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
-
+    <!--<script type="text/javascript" src="../SemanticUI-2.2.13/semantic.min.js"></script>-->
+    <script type="text/javascript" src="../DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+    <!--<script type="text/javascript" src="../DataTables-1.10.18/js/dataTables.semanticui.min.js"></script>-->
+    <script type="text/javascript" src="../Responsive-2.2.2/js/dataTables.responsive.min.js"></script>
+    <!--<script type="text/javascript" src="../Responsive-2.2.2/js/responsive.semanticui.min.js"></script>-->
+    <script type="text/javascript" src="../Select-1.2.6/js/dataTables.select.min.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -82,12 +86,15 @@
                                                 <tr>
                                                     <th>Nombre</th>
                                                     <th>Usuario</th>
+                                                    <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
                                                     <th>Nombre</th>
                                                     <th>Usuario</th>
+                                                    <th>Acciones</th>
+
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -95,9 +102,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
 
 
                     </section>
@@ -230,7 +234,7 @@
 
                     <!-- Settings tab content -->
                     <div class="tab-pane" id="control-sidebar-settings-tab">
-                        <form method="post">
+                        <form enctype='application/json' method="post">
                             <h3 class="control-sidebar-heading">General Settings</h3>
 
                             <div class="form-group">
@@ -301,7 +305,7 @@
             </aside>
             <!-- /.control-sidebar -->
             <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
+ immediately after the control sidebar -->
             <div class="control-sidebar-bg"></div>
 
 
@@ -315,37 +319,43 @@
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Nuevo Usuario</h4>
                 </div>
-                <div class="modal-body">
-                    <form role="form" name="form">
+                <form id="form" method="POST">
+                    <div class="modal-body">
+
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="usuario">Usuario</label>
                                 <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario"
                                     required>
 
+                                <input type="checkbox" value="checked" hidden name="activo">
+
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Contraseña</label>
-                                <input type="password" class="form-control" name="password" id="exampleInputPassword1"
-                                    placeholder="Contraseña">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    placeholder="Contraseña" required>
                             </div>
 
                         </div>
                         <!-- /.box-body -->
 
-                        <!-- <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div> -->
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="guardar" class="btn btn-primary">OK</button>
-                </div>
+                        <div class="box-footer">
+                            <#--<button type="submit" style="text-align: right" class="btn btn-primary">OK</button>-->
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" id="guardar" class="btn btn-primary">OK</button>
+                    </div>
+
+                </form>
             </div>
             <!-- /.modal-content -->
         </div>
@@ -354,78 +364,88 @@
     <!-- /.modal -->
 
     <!-- /.modal-dialog -->
-    </div> -->
-    </div>
+
     <!-- ./wrapper -->
 
     <script>
+        let nuevo = [];
+
 
         $(document).ready(function () {
 
-            alert("funciona");
-            let nuevo = [];
+            $("#form").on("submit", function (e) {
 
 
-            let tabla = $('#tabla').DataTable({
-                dom: 'Bfrtip',
-                data: nuevo,
-                columns: [
-                    { targets: 0, data: 'nombre' },
-                    { targets: 1, data: 'usuario' },
-                    {
-                        targets: 3,
-                        data: 'id',
-                        "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button>' + '<button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
-                        },
-                        // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
-                        // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
-                    }
-                ],
-                searchable: false,
-                buttons: [],
-                language: {
-                    search: "Buscar:",
-                    paginate: {
-                        previous: "Anterior",
-                        next: "Siguiente"
-                    },
-                    emptyTable: "No hay datos disponibles",
-                    info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
-                },
+
+
+                e.preventDefault();
+                // e.stopPropagation();
+                crearUsuario();
 
             });
-            tabla.columns.adjust().draw();
+
+            // let tabla = $('#tabla').DataTable({
+            //     dom: 'Bfrtip',
+            //     data: nuevo,
+            //     columns: [
+            //         { targets: 0, data: 'nombre' },
+            //         { targets: 1, data: 'usuario' },
+            //         {
+            //             targets: -1,
+            //             data: 'id',
+            //             "render": function (data, type, row, meta) {
+            //                 return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button>' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+            //             },
+            //             // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
+            //             // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
+            //         }
+            //     ],
+            //     searchable: false,
+            //     buttons: [],
+            //     language: {
+            //         search: "Buscar:",
+            //         paginate: {
+            //             previous: "Anterior",
+            //             next: "Siguiente"
+            //         },
+            //         emptyTable: "No hay datos disponibles",
+            //         info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+            //     },
+
+            // });
+            // // tabla.columns.adjust().draw();
 
             actualizarTabla();
+           
 
-            $("#guardar").on("click", function () {
 
-                alert("guardando usuario");
-
-            })
-
-        })
+        });
 
         function actualizarTabla() {
 
 
             $.ajax({
-                type: 'GET',
+                dataType: 'json',
                 url: '/usuarios',
                 success: function (data) {
 
                     data.forEach(function (usuario) {
 
                         nuevo.push({
-                            id: usuario.id,
-                            nombre: usuario.nombre
+                            nombre: usuario.nombre,
+                            usuario: usuario.usuario
                         });
 
                     })
 
+                    console.log(nuevo);
+
+
+                },
+                error: function () {
+                    alert('Call not resolved')
                 }
-            })
+            });
 
             let tabla = $('#tabla').DataTable({
                 destroy: true,
@@ -435,10 +455,10 @@
                     { targets: 0, data: 'nombre' },
                     { targets: 1, data: 'usuario' },
                     {
-                        targets: 3,
+                        targets: -1,
                         data: 'id',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button>' + '<button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+                            return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button>' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
                         },
                         // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                         // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -457,22 +477,39 @@
                 },
 
             });
-            tabla.columns.adjust().draw();
+            
         }
 
         function crearUsuario() {
 
+
+            let json = []
+
+            json.push({ 
+                nombre: $("#nombre").val(), 
+                usuario: $("#usuario").val(),
+                password: $("#password").val(),
+                activo: true
+             });
+
+             console.log(JSON.stringify(json));
+             
+
             $.ajax({
                 type: 'POST',
-                data: $('form').serialize,
-                url: '/usuarios/nuevo',
-                success: actualizarTabla()
+                data: JSON.stringify(json),
+                contentType: "application/json",
+                url: '/usuario/crear',
+                success: function () {
+
+                    actualizarTabla();
+                    $('#modal-default').modal('toggle');
+                }
             });
         }
     </script>
 
-    <!-- jQuery 3 -->
-    <script src="/webjars/AdminLTE/2.4.0/bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap 3.3.7 -->
     <script src="/webjars/AdminLTE/2.4.0/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
