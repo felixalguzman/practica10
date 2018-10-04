@@ -42,6 +42,9 @@
     <script type="text/javascript" src="../Responsive-2.2.2/js/dataTables.responsive.min.js"></script>
     <!--<script type="text/javascript" src="../Responsive-2.2.2/js/responsive.semanticui.min.js"></script>-->
     <script type="text/javascript" src="../Select-1.2.6/js/dataTables.select.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -338,8 +341,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="Contraseña" required>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="permisos">Permisos</label>
+                                <select name="permisos" style="width: 100%" class="form-control" id="permisos" required
+                                    multiple="multiple">
+
+                                </select>
                             </div>
 
                         </div>
@@ -382,6 +393,12 @@
                 // e.stopPropagation();
                 crearUsuario();
 
+
+
+                $("#form")[0].reset();
+
+
+
             });
 
             // let tabla = $('#tabla').DataTable({
@@ -416,10 +433,54 @@
             // // tabla.columns.adjust().draw();
 
             actualizarTabla();
-           
+
+
+            cargarRoles();
 
 
         });
+
+        function cargarRoles() {
+
+            $('#permisos').select2({
+
+                width: 'resolve',
+                placeholder: 'Roles',
+                allowClear: true,
+                ajax: {
+                    url: "/roles",
+                    processResults: function (data) {
+
+                        data = data.map(function (item) {
+                            return {
+                                id: item.id,
+                                text: item.nombre,
+                                // otherfield: item.otherfield
+                            };
+                        });
+                        return { results: data };
+                    },
+                }
+
+            });
+
+        }
+
+        function generarRol(rol) {
+
+            let formato = [];
+
+
+            formato.push({
+                id: rol.id,
+                text: rol.nombre
+            })
+
+
+
+            return JSON.parse(formato);
+
+        }
 
         function actualizarTabla() {
 
@@ -436,7 +497,7 @@
                             usuario: usuario.usuario
                         });
 
-                    })
+                    });
 
                     console.log(nuevo);
 
@@ -477,7 +538,7 @@
                 },
 
             });
-            
+
         }
 
         function crearUsuario() {
@@ -485,15 +546,15 @@
 
             let json = []
 
-            json.push({ 
-                nombre: $("#nombre").val(), 
+            json.push({
+                nombre: $("#nombre").val(),
                 usuario: $("#usuario").val(),
                 password: $("#password").val(),
                 activo: true
-             });
+            });
 
-             console.log(JSON.stringify(json));
-             
+            console.log(JSON.stringify(json));
+
 
             $.ajax({
                 type: 'POST',

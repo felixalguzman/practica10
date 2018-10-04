@@ -35,9 +35,6 @@ public class UsuariosController {
     @RequestMapping("/index/usuarios")
     public String index(Model model) {
         model.addAttribute("titulo", "Usuarios");
-
-        model.addAttribute("roles", rolServices.listaRoles());
-
         return "/freemarker/usuarios";
     }
 
