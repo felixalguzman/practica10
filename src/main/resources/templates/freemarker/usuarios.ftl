@@ -384,6 +384,9 @@
 
         $(document).ready(function () {
 
+
+
+
             $("#form").on("submit", function (e) {
 
 
@@ -401,38 +404,11 @@
 
             });
 
-            // let tabla = $('#tabla').DataTable({
-            //     dom: 'Bfrtip',
-            //     data: nuevo,
-            //     columns: [
-            //         { targets: 0, data: 'nombre' },
-            //         { targets: 1, data: 'usuario' },
-            //         {
-            //             targets: -1,
-            //             data: 'id',
-            //             "render": function (data, type, row, meta) {
-            //                 return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button>' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
-            //             },
-            //             // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
-            //             // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
-            //         }
-            //     ],
-            //     searchable: false,
-            //     buttons: [],
-            //     language: {
-            //         search: "Buscar:",
-            //         paginate: {
-            //             previous: "Anterior",
-            //             next: "Siguiente"
-            //         },
-            //         emptyTable: "No hay datos disponibles",
-            //         info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
-            //     },
 
-            // });
-            // // tabla.columns.adjust().draw();
 
-            actualizarTabla();
+
+
+            buscarUsuarios();
 
 
             cargarRoles();
@@ -482,9 +458,9 @@
 
         }
 
-        function actualizarTabla() {
+        function buscarUsuarios() {
 
-
+            let nuevo = [];
             $.ajax({
                 dataType: 'json',
                 url: '/usuarios',
@@ -499,7 +475,9 @@
 
                     });
 
-                    console.log(nuevo);
+
+                    actualizarTabla(nuevo);
+
 
 
                 },
@@ -508,10 +486,16 @@
                 }
             });
 
+
+
+        }
+
+        function actualizarTabla(json) {
+
             let tabla = $('#tabla').DataTable({
                 destroy: true,
                 dom: 'Bfrtip',
-                data: nuevo,
+                data: json,
                 columns: [
                     { targets: 0, data: 'nombre' },
                     { targets: 1, data: 'usuario' },
@@ -519,7 +503,7 @@
                         targets: -1,
                         data: 'id',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button>' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+                            return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button> &nbsp' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
                         },
                         // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                         // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -536,8 +520,12 @@
                     emptyTable: "No hay datos disponibles",
                     info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
                 },
+                autoWidth: true
 
             });
+
+            $('#container').css('display', 'block');
+            tabla.columns.adjust().draw();
 
         }
 
@@ -553,7 +541,7 @@
                 activo: true
             });
 
-            console.log(JSON.stringify(json));
+
 
 
             $.ajax({
