@@ -26,18 +26,21 @@ public class Cliente implements Serializable {
     @Column(nullable = true)
     private String foto;
 
+    private Boolean activo;
+
     @OneToMany
     private Set<Rol> rolSet;
 
     public Cliente() {
     }
 
-    public Cliente(String nombre, String cedula, int telefono, String correo, String foto, Set<Rol> rolSet) {
+    public Cliente(String nombre, String cedula, int telefono, String correo, String foto, Boolean activo, Set<Rol> rolSet) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
         this.correo = correo;
         this.foto = foto;
+        this.activo = activo;
         this.rolSet = rolSet;
     }
 
@@ -95,5 +98,13 @@ public class Cliente implements Serializable {
 
     public void setRolSet(Set<Rol> rolSet) {
         this.rolSet = rolSet;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

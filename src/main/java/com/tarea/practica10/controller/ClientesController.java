@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * ClientesController
@@ -31,17 +28,36 @@ public class ClientesController {
     }
 
 
-    
     @RequestMapping(value = "/clientes/crear", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<List<Cliente>> crearCliente(@RequestBody List<Cliente> clientesList) {
+
+        for (Cliente cliente : clientesList) {
+
+            clienteServices.crearCliente(cliente);
+
+        }
 
         return new ResponseEntity<>(clientesList, HttpStatus.OK);
     }
 
+
     @ResponseBody
-    @RequestMapping(value = "/clientes", produces = { "application/json" })
+    @RequestMapping(value = "/clientes", produces = {"application/json"})
     public List<Cliente> clientes() {
         return clienteServices.listaClientes();
+    }
+
+    @RequestMapping(value = "/cliente/eliminar/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Long> eliminarCliente(@PathVariable(value = "id") long id) {
+
+
+        Cliente cliente = clienteServices.buscarCliente(id);
+
+        clienteServices.eliminarCliente(cliente);
+        
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
+
     }
 
 }

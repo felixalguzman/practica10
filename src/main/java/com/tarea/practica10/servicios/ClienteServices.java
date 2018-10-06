@@ -25,9 +25,21 @@ public class ClienteServices {
         
     }
 
+    @Transactional
+    public void eliminarCliente(Cliente cliente){
+
+        cliente.setActivo(false);
+        clienteRepository.save(cliente);
+    }
+
+    public Cliente buscarCliente(long id){
+
+        return clienteRepository.findById(id);
+    }
+
     public List<Cliente> listaClientes() {
         
-        return clienteRepository.findAll();
+        return clienteRepository.findAllByActivo(true);
     }
 
     

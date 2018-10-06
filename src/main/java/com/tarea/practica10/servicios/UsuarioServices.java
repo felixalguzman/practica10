@@ -52,11 +52,12 @@ public class UsuarioServices implements UserDetailsService {
 
     }
 
+    @Transactional
     public void eliminarUsuario(long id) {
         
         Usuario usuario = usuarioRepository.findById(id);
-
-        usuarioRepository.delete(usuario);
+        usuario.setActivo(false);
+        usuarioRepository.save(usuario);
     }
     /**
      * Funcion para revisar si el admin existe.
