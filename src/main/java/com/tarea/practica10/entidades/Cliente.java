@@ -23,7 +23,7 @@ public class Cliente implements Serializable {
     @Column(nullable = true)
     private String correo;
 
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "TEXT")
     private String foto;
 
     private Boolean activo;

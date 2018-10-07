@@ -1,9 +1,6 @@
 package com.tarea.practica10.entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -18,11 +15,18 @@ public class Equipo implements Serializable {
 
     private int tarifa;
 
+    @Column(columnDefinition = "TEXT")
     private String foto;
 
     private String familia;
 
     private String subFamilia;
+
+    private Boolean disponible;
+
+    private Boolean activo;
+
+    private int cantidad;
 
     @ManyToOne
     private Alquiler alquiler;
@@ -30,12 +34,15 @@ public class Equipo implements Serializable {
     public Equipo() {
     }
 
-    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Alquiler alquiler) {
+    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean disponible, Boolean activo, int cantidad, Alquiler alquiler) {
         this.nombre = nombre;
         this.tarifa = tarifa;
         this.foto = foto;
         this.familia = familia;
         this.subFamilia = subFamilia;
+        this.disponible = disponible;
+        this.activo = activo;
+        this.cantidad = cantidad;
         this.alquiler = alquiler;
     }
 
@@ -93,5 +100,29 @@ public class Equipo implements Serializable {
 
     public void setAlquiler(Alquiler alquiler) {
         this.alquiler = alquiler;
+    }
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

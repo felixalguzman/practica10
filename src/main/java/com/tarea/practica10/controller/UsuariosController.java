@@ -42,7 +42,7 @@ public class UsuariosController {
         return "/freemarker/usuarios";
     }
 
-       @ResponseBody
+    @ResponseBody
     @RequestMapping(value = "/usuarios", produces = { "application/json" })
     public List<Usuario> usuarios() {
         return usuariosServices.obtenerUsuarios();

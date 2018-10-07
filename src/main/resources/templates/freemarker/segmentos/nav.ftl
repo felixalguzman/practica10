@@ -325,7 +325,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/index/clientes"><i class="fa fa-user"></i> Clientes</a></li>
                     <li><a href="/index/usuarios"><i class="fa fa-user"></i> Usuarios</a></li>
-                    <li><a href="/"><i class="fa fa-circle-o"></i> Roles</a></li>
+                    <#--<li><a href="/"><i class="fa fa-circle-o"></i> Roles</a></li>-->
                     <!-- <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
                     <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li> -->
                 </ul>
@@ -467,6 +467,8 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                 </ul>
             </li> -->
+            <li><a href="/index/equipos"><i class="fa fa-industry"></i> <span>Equipos</span></a></li>
+
             <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

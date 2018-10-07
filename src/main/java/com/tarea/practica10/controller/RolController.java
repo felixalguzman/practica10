@@ -24,15 +24,18 @@ public class RolController {
     RolServices rolServices;
 
     @RequestMapping(value = "/rol/crear", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<Rol> crearRol(@RequestBody Rol rol) {
+    public ResponseEntity<List<Rol>> crearRol(@RequestBody List<Rol> rolList) {
 
-        rolServices.crearRol(rol);
+        for (Rol rol : rolList) {
 
-        return new ResponseEntity<>(rol, HttpStatus.OK);
+            rolServices.crearRol(rol);
+        }
+
+        return new ResponseEntity<>(rolList, HttpStatus.OK);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/roles", produces = { "application/json" })
+    @RequestMapping(value = "/roles", produces = {"application/json"})
     public List<Rol> roles() {
         return rolServices.listaRoles();
     }
