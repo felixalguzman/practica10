@@ -449,10 +449,9 @@ immediately after the control sidebar -->
                 data.forEach(function (cliente) {
 
 
-
                     nuevo.push({
                         id: cliente.id,
-                        foto: '<img src="data:image/png;base64, ' + cliente.foto + '" width="70px" height="70px"/>',
+                        foto: cliente.foto === "" ? '<img src="data:image/png;base64, ' + fotoDefault  + '" width="70px" height="70px"/>' : '<img src="data:image/png;base64, ' + cliente.foto + '" width="70px" height="70px"/>',
                         cedula: cliente.cedula,
                         nombre: cliente.nombre,
                         telefono: cliente.telefono,
@@ -461,7 +460,6 @@ immediately after the control sidebar -->
 
                 });
 
-                console.log(nuevo);
 
                 actualizarTabla(nuevo);
 
