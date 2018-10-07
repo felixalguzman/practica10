@@ -21,8 +21,21 @@ public class EquipoServices {
 
     }
 
+    @Transactional
+    public void eliminarEquipo(Equipo equipo){
+
+        equipo.setActivo(false);
+        equipoRepository.save(equipo);
+
+    }
+
+    public Equipo buscarEquipo(long id){
+
+        return equipoRepository.findById(id);
+    }
+
     public List<Equipo> buscarEquipos(){
 
-        return equipoRepository.findAllByDisponible(true);
+        return equipoRepository.findAllByActivoOrderByDisponibleDesc(true);
     }
 }

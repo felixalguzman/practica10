@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface EquipoRepository extends JpaRepository<Equipo, Long> {
 
-   List<Equipo> findAllByDisponible(Boolean aBoolean);
+   List<Equipo> findAllByActivoOrderByDisponibleDesc(Boolean aBoolean);
 
    Equipo findById(long id);
 }

@@ -50,7 +50,8 @@ public class EquiposController {
     public ResponseEntity<Long> eliminarEquipo(@PathVariable(value ="id") long id) {
 
         System.out.println("id:  " + id);
-//        equipoServices.e(id);
+        Equipo equipo = equipoServices.buscarEquipo(id);
+        equipoServices.eliminarEquipo(equipo);
 
         return new ResponseEntity<>(id, HttpStatus.OK);
 
