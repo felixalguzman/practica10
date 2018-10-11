@@ -328,7 +328,7 @@ immediately after the control sidebar -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nuevo Cliente</h4>
+                <h4 class="modal-title">Nuevo Equipo</h4>
             </div>
             <form id="form" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -472,7 +472,6 @@ immediately after the control sidebar -->
 
                 });
 
-                console.log(nuevo);
 
                 actualizarTabla(nuevo);
 
