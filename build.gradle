@@ -33,12 +33,14 @@ dependencies {
     runtime('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
-    
+
     //Plantilla
 
-    	//Trabajando con FreeMarker...
-	compile('org.springframework.boot:spring-boot-starter-freemarker')
+    //Trabajando con FreeMarker...
+    compile('org.springframework.boot:spring-boot-starter-freemarker')
 
+// https://mvnrepository.com/artifact/joda-time/joda-time
+    compile group: 'joda-time', name: 'joda-time', version: '2.10'
 
 
     compile 'org.webjars:AdminLTE:2.4.0'
@@ -48,8 +50,6 @@ dependencies {
     compile 'org.webjars:jquery:3.2.1'
     //Jquery
     compile 'org.webjars:jquery:3.3.1-1'
-
-
 
 
 }

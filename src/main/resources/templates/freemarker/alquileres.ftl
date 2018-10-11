@@ -453,13 +453,37 @@ immediately after the control sidebar -->
 
         let tabla = $('#tabla').DataTable();
         let dataEquipos = tabla.rows().data();
-
+        let equiposDatos = [];
         for (let i = 0; i < dataEquipos.length; i++) {
 
-            let cant = $("#cantidad_" + dataEquipos[i].id).val();
-            console.log("equipo: " + dataEquipos[i].id + " cantidad: " + cant);
 
+            let cant = $("#cantidad_" + dataEquipos[i].id).val();
+
+            console.log("equipo: " + dataEquipos[i].id + " cantidad: " + cant);
+            equiposDatos.push(dataEquipos[i].id + ":" + cant);
         }
+
+
+        let json = [{
+
+            cliente: $("#cliente").val(),
+            fechaEntrega: $("#fechaEntrega").val(),
+            equipos: equiposDatos
+
+        }];
+
+        console.log(json);
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(json),
+            contentType: "application/json",
+            url: '/alquiler/crear',
+            success: function () {
+
+                $('#modal-default').modal('toggle');
+            }
+        });
     }
 
 
