@@ -14,6 +14,6 @@ public interface AlquilerRepository extends JpaRepository<Alquiler, Long> {
 
     List<Alquiler> findAllByCliente(Cliente cliente);
 
-    List<Alquiler> findAllByPendiente(Boolean aBoolean);
+    List<Alquiler> findAllByPendienteOrderByFechaEntregaDesc(Boolean aBoolean);
 
 }

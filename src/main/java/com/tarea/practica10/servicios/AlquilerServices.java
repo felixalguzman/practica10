@@ -23,7 +23,7 @@ public class AlquilerServices {
 
     public List<Alquiler> listaAlquileres(){
 
-        return alquilerRepository.findAllByPendiente(true);
+        return alquilerRepository.findAllByPendienteOrderByFechaEntregaDesc(true);
     }
 
     public List<Alquiler> alquilerCliente(Cliente cliente){
