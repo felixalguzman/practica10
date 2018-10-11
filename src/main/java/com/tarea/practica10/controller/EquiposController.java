@@ -29,15 +29,21 @@ public class EquiposController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/equipos", produces = { "application/json" })
+    @RequestMapping(value = "/equiposDisponibles", produces = {"application/json"})
+    public List<Equipo> equiposDisponibles() {
+        return equipoServices.buscarEquiposDisponibles();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/equipos", produces = {"application/json"})
     public List<Equipo> equipos() {
         return equipoServices.buscarEquipos();
     }
 
     @RequestMapping(value = "/equipo/crear", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<List<Equipo>> crearUsuario(@RequestBody List<Equipo> equipoList) {
+    public ResponseEntity<List<Equipo>> crearEquipo(@RequestBody List<Equipo> equipoList) {
 
-        for (Equipo equipo: equipoList) {
+        for (Equipo equipo : equipoList) {
 
             equipoServices.crearEquipo(equipo);
         }
@@ -46,8 +52,18 @@ public class EquiposController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/equipo/buscar/{id}", method = RequestMethod.GET)
+    public Equipo buscarEquipo(@PathVariable(value = "id") long id) {
+
+
+        return equipoServices.buscarEquipo(id);
+
+
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/equipo/eliminar/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Long> eliminarEquipo(@PathVariable(value ="id") long id) {
+    public ResponseEntity<Long> eliminarEquipo(@PathVariable(value = "id") long id) {
 
         System.out.println("id:  " + id);
         Equipo equipo = equipoServices.buscarEquipo(id);

@@ -36,6 +36,11 @@ public class EquipoServices {
 
     public List<Equipo> buscarEquipos(){
 
+        return equipoRepository.findAll();
+    }
+
+    public List<Equipo> buscarEquiposDisponibles(){
+
         return equipoRepository.findAllByActivoOrderByDisponibleDesc(true);
     }
 }

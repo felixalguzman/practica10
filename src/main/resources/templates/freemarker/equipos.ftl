@@ -360,7 +360,7 @@ immediately after the control sidebar -->
 
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
-                            <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad" required>
+                            <input type="number" name="cantidad" id="cantidad" min="0" placeholder="Cantidad" required>
                         </div>
 
                         <div class="form-group">

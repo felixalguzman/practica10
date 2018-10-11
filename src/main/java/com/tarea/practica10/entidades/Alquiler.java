@@ -22,16 +22,19 @@ public class Alquiler implements Serializable {
     @OneToMany
     private Set<Equipo> equipoSet;
 
+    private Boolean pendiente;
+
     private int costo;
 
     public Alquiler() {
     }
 
-    public Alquiler(Date fecha, Date fechaEntrega, Cliente cliente, Set<Equipo> equipoSet, int costo) {
+    public Alquiler(Date fecha, Date fechaEntrega, Cliente cliente, Set<Equipo> equipoSet, Boolean pendiente, int costo) {
         this.fecha = fecha;
         this.fechaEntrega = fechaEntrega;
         this.cliente = cliente;
         this.equipoSet = equipoSet;
+        this.pendiente = pendiente;
         this.costo = costo;
     }
 
@@ -81,5 +84,13 @@ public class Alquiler implements Serializable {
 
     public void setCosto(int costo) {
         this.costo = costo;
+    }
+
+    public Boolean getPendiente() {
+        return pendiente;
+    }
+
+    public void setPendiente(Boolean pendiente) {
+        this.pendiente = pendiente;
     }
 }

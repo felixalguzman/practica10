@@ -468,6 +468,7 @@
                 </ul>
             </li> -->
             <li><a href="/index/equipos"><i class="fa fa-industry"></i> <span>Equipos</span></a></li>
+            <li><a href="/index/alquileres"><i class="fa fa-rebel"></i> <span>Alquileres</span></a></li>
 
             <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             <li class="header">LABELS</li>

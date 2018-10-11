@@ -442,22 +442,6 @@
 
         }
 
-        function generarRol(rol) {
-
-            let formato = [];
-
-
-            formato.push({
-                id: rol.id,
-                text: rol.nombre
-            })
-
-
-
-            return JSON.parse(formato);
-
-        }
-
         function buscarUsuarios() {
 
             let nuevo = [];
