@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EquipoAlquilerRepository extends JpaRepository<EquipoAlquiler, Long> {
 
+    EquipoAlquiler findById(long id);
+
 }

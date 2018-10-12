@@ -218,6 +218,85 @@ immediately after the control sidebar -->
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Factura</h4>
+            </div>
+
+                <div class="modal-body">
+
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="clienteFactura">Cliente</label>
+                            <input id="clienteFactura" disabled>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="fechaEntregaFactura">Fecha Entrega</label>
+                            <input type="date" id="fechaEntregaFactura" disabled>
+                        </div>
+
+
+
+                        <table id="tablaFactura" class="display" style="width:100%">
+
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Foto</th>
+                                <th>Tarifa</th>
+                                <th>Familia</th>
+                                <th>Sub Familia</th>
+                                <th>Cantidad</th>
+                                <th>Devuelto</th>
+
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Foto</th>
+                                <th>Tarifa</th>
+                                <th>Familia</th>
+                                <th>Sub Familia</th>
+                                <th>Cantidad</th>
+                                <th>Devuelto</th>
+
+                            </tr>
+                            </tfoot>
+                        </table>
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <form id="form" method="POST">
+
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" id="guardar" class="btn btn-primary">OK</button>
+                </div>
+
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <!-- /.modal -->
 
 
@@ -554,7 +633,7 @@ immediately after the control sidebar -->
                     targets: -1,
                     data: 'id',
                     "render": function (data, type, row, meta) {
-                        return ' &nbsp' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+                        return ' &nbsp' + ' <button class="btn btn-secondary btn-sm" id=alquiler_' + data + ' onclick="facturar(this.id)"><i class="fa fa-file-text-o"></i>  Facturar</button>'
                     },
                     // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                     // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -578,6 +657,12 @@ immediately after the control sidebar -->
 
         // $('#container').css('display', 'block');
         // alquileres.columns.adjust().draw();
+    }
+
+    function facturar(id) {
+
+
+
     }
 
 

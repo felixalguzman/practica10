@@ -2,7 +2,6 @@ package com.tarea.practica10.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 public class Equipo implements Serializable {
@@ -22,8 +21,8 @@ public class Equipo implements Serializable {
     private String familia;
 
     private String subFamilia;
-
-    private Boolean disponible;
+    @Column(columnDefinition = "Boolean default true")
+    private Boolean devuelto;
 
     private Boolean activo;
 
@@ -32,13 +31,13 @@ public class Equipo implements Serializable {
     public Equipo() {
     }
 
-    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean disponible, Boolean activo, int cantidad) {
+    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean devuelto, Boolean activo, int cantidad) {
         this.nombre = nombre;
         this.tarifa = tarifa;
         this.foto = foto;
         this.familia = familia;
         this.subFamilia = subFamilia;
-        this.disponible = disponible;
+        this.devuelto = devuelto;
         this.activo = activo;
         this.cantidad = cantidad;
     }
@@ -91,12 +90,12 @@ public class Equipo implements Serializable {
         this.subFamilia = subFamilia;
     }
 
-    public Boolean getDisponible() {
-        return disponible;
+    public Boolean getDevuelto() {
+        return devuelto;
     }
 
-    public void setDisponible(Boolean disponible) {
-        this.disponible = disponible;
+    public void setDevuelto(Boolean devuelto) {
+        this.devuelto = devuelto;
     }
 
     public Boolean getActivo() {

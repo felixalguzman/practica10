@@ -364,8 +364,8 @@ immediately after the control sidebar -->
                         </div>
 
                         <div class="form-group">
-                            <label for="disponible">Disponible</label>
-                            <input type="checkbox" name="disponible" id="disponible" placeholder="Disponible">
+                            <label for="devuelto">Disponible</label>
+                            <input type="checkbox" name="devuelto" id="devuelto" placeholder="Disponible">
                         </div>
 
                         <div class="form-group">
@@ -557,7 +557,7 @@ immediately after the control sidebar -->
             tarifa: $("#tarifa").val(),
             familia: $("#familia").val(),
             subFamilia: $("#subFamilia").val(),
-            disponible: $("#disponible").val() === "on",
+            devuelto: $("#devuelto").val() === "on",
             cantidad: $("#cantidad").val(),
             foto: $("#foto").val(),
             activo: true

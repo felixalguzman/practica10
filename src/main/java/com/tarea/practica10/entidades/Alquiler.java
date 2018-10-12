@@ -19,7 +19,7 @@ public class Alquiler implements Serializable {
     @OneToOne
     private Cliente cliente;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<EquipoAlquiler> equipoAlquiler;
 
     private Boolean pendiente;

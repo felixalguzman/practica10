@@ -1,10 +1,15 @@
 package com.tarea.practica10.servicios;
 
+import com.tarea.practica10.entidades.Equipo;
 import com.tarea.practica10.entidades.EquipoAlquiler;
 import com.tarea.practica10.repositorio.EquipoAlquilerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class EquipoAlquilerServices {
@@ -13,9 +18,22 @@ public class EquipoAlquilerServices {
     EquipoAlquilerRepository equipoAlquilerRepository;
 
     @Transactional
-    public void crearEquipoAlquiler(EquipoAlquiler equipoAlquiler){
+    public void crearEquipoAlquiler(EquipoAlquiler equipoAlquiler) {
 
         equipoAlquilerRepository.save(equipoAlquiler);
 
+    }
+
+    public List<Equipo> obtenerEquiposAlquiler(Set<EquipoAlquiler> equipoAlquilerSet) {
+
+        List<Equipo> equipoList = new ArrayList<>();
+
+        for (EquipoAlquiler equipoAlquiler : equipoAlquilerSet) {
+
+            equipoList.add(equipoAlquiler.getEquipo());
+
+        }
+
+        return equipoList;
     }
 }

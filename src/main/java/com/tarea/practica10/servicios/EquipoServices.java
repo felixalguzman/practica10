@@ -63,7 +63,7 @@ public class EquipoServices {
 
             Equipo equipo = buscarEquipo(Integer.parseInt(parte[0]));
             equipo.setCantidad(equipo.getCantidad() - Integer.parseInt(parte[1]));
-
+            equipo.setDevuelto(false);
             crearEquipo(equipo);
             equipoAlquiler.setEquipo(equipo);
             equipoAlquilerSet.add(equipoAlquiler);

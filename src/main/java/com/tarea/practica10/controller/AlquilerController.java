@@ -78,7 +78,7 @@ public class AlquilerController {
         Date fechaEntrega;
         try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-dd-mm");
             java.util.Date date = sdf1.parse(alquilerParametro.getFechaEntrega());
             fechaEntrega = new java.sql.Date(date.getTime());
         } catch (ParseException e) {
