@@ -220,7 +220,7 @@ immediately after the control sidebar -->
 </div>
 
 
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modalFactura">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -661,7 +661,92 @@ immediately after the control sidebar -->
 
     function facturar(id) {
 
+        let nuevo = [];
+        $.ajax({
+            dataType: 'json',
+            url: '/alquiler/buscar/'+id,
+            success: function (data) {
 
+                $("#clienteFactura").val(data.cliente.nombre);
+                $("#fechaEntregaFactura").val(data.fechaEntrega);
+
+
+                data.equipoAlquiler.forEach(function (equipo) {
+
+                    $('#modalFactura').modal('toggle');
+
+
+
+                    nuevo.push({
+                        id: equipo.id,
+                        nombre: equipo.nombre,
+                        foto: equipo.foto === "" ? '<img src="data:image/png;base64, ' + fotoDefault + '" width="70px" height="70px"/>' : '<img src="data:image/png;base64, ' + data.foto + '" width="70px" height="70px"/>',
+                        tarifa: equipo.tarifa,
+                        familia: equipo.familia,
+                        subFamilia: equipo.subFamilia,
+                        cantidad: equipo.cantidad
+                    })
+
+                });
+
+                console.log(data);
+                actualizarTablaFactura(nuevo);
+
+
+            },
+            error: function () {
+                alert('Call not resolved')
+            }
+        });
+
+
+    }
+
+    function devolver(id) {
+
+
+
+    }
+
+    function actualizarTablaFactura(json) {
+
+        let alquileres = $('#tablaFactura').DataTable({
+            destroy: true,
+            dom: 'Bfrtip',
+            data: json,
+            columns: [
+
+                {targets: 0, data: 'nombre', defaultContent: ""},
+                {targets: 1, data: 'foto', defaultContent: ""},
+                {targets: 2, data: 'tarifa', defaultContent: ""},
+                {targets: 3, data: 'familia', defaultContent: ""},
+                {targets: 4, data: 'subFamilia', defaultContent: ""},
+                {targets: 5, data: 'cantidad', defaultContent: ""},
+                {
+                    targets: -1,
+                    data: 'id',
+                    "render": function (data, type, row, meta) {
+                        return ' &nbsp' + ' <button class="btn btn-secondary btn-sm" id=alquiler_' + data + ' onclick="devolver(this.id)"><i id=icono_'+data+' class="fa fa-check"></i>  Devuelto</button>'
+                    },
+                    // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
+                    // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
+                }
+
+            ],
+            searchable: false,
+            buttons: [],
+            language: {
+                search: "Buscar:",
+                paginate: {
+                    previous: "Anterior",
+                    next: "Siguiente"
+                },
+                emptyTable: "No hay datos disponibles",
+                info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+            },
+            autoWidth: true
+
+        });
 
     }
 

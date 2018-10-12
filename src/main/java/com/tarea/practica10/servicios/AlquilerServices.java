@@ -30,5 +30,10 @@ public class AlquilerServices {
         return alquilerRepository.findAllByCliente(cliente);
     }
 
+    public Alquiler buscarAlquiler(long id){
+
+        return alquilerRepository.findById(id);
+    }
+
 
 }

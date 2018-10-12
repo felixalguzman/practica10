@@ -111,4 +111,11 @@ public class AlquilerController {
 
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/alquiler/buscar/{id}", method = RequestMethod.GET)
+    public Alquiler buscarAlquiler(@PathVariable(value = "id") long id){
+
+        return alquilerServices.buscarAlquiler(id);
+    }
+
 }
