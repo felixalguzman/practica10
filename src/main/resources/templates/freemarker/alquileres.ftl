@@ -485,6 +485,7 @@ immediately after the control sidebar -->
             success: function () {
 
                 $('#modal-default').modal('toggle');
+                buscarAlquileres();
             }
         });
     }
@@ -502,7 +503,7 @@ immediately after the control sidebar -->
 
                     let cant = [];
 
-                   cant= alquiler.equipoSet.map(a =>  a.cantidad);
+                   // cant= alquiler.equipoSet.map(a =>  a.cantidad);
 
                     console.log(cant);
 
@@ -511,7 +512,7 @@ immediately after the control sidebar -->
                         cliente: alquiler.cliente.nombre,
                         costo: alquiler.costo,
                         fechaEntrega: alquiler.fechaEntrega,
-                        cantidad: cant.reduce(getSum)
+                        cantidad: alquiler.cantidadEquipos
                     })
 
                 });

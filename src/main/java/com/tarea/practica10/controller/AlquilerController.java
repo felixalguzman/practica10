@@ -3,6 +3,7 @@ package com.tarea.practica10.controller;
 import com.tarea.practica10.entidades.Alquiler;
 import com.tarea.practica10.entidades.Cliente;
 import com.tarea.practica10.entidades.Equipo;
+import com.tarea.practica10.entidades.EquipoAlquiler;
 import com.tarea.practica10.servicios.AlquilerParametro;
 import com.tarea.practica10.servicios.AlquilerServices;
 import com.tarea.practica10.servicios.ClienteServices;
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,19 +54,26 @@ public class AlquilerController {
     }
 
 
-    @RequestMapping(value = "/alquiler/crear", method = RequestMethod.POST,  consumes = "application/json")
+    @RequestMapping(value = "/alquiler/crear", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<List<AlquilerParametro>> crearAlquiler(@RequestBody List<AlquilerParametro> alquilerParametroList) {
 
         Alquiler alquiler = new Alquiler();
         AlquilerParametro alquilerParametro = alquilerParametroList.get(0);
-        System.out.println(""+ alquilerParametro.getFechaEntrega());
+        System.out.println("" + alquilerParametro.getFechaEntrega());
 
+        int cant = 0;
+        for(String s: alquilerParametro.getEquipos()){
+            String[] parte = s.split(":");
+
+            cant += Integer.parseInt(parte[1]);
+        }
         Cliente cliente = clienteServices.buscarCliente(Integer.parseInt(alquilerParametro.getCliente()));
-        Set<Equipo> equipoList = equipoServices.buscarEquiposAlquiler(alquilerParametro.getEquipos());
-
+        Set<EquipoAlquiler> equipoAlquiler = equipoServices.buscarEquiposAlquiler(alquilerParametro.getEquipos());
+        alquiler.setCantidadEquipos(cant);
         alquiler.setCliente(cliente);
         alquiler.setPendiente(true);
-        alquiler.setEquipoSet(equipoList);
+
+        alquiler.setEquipoAlquiler(equipoAlquiler);
         alquiler.setFecha(Date.valueOf(LocalDate.now()));
         Date fechaEntrega;
         try {
@@ -93,9 +102,8 @@ public class AlquilerController {
         int days = Days.daysBetween(dateTime, dateTimeFin).getDays();
 
 
-        alquiler.setCosto(10*days*4);
-//
-//
+        alquiler.setCosto(10 * days * 4);
+
         alquilerServices.crearAlquiler(alquiler);
 
 

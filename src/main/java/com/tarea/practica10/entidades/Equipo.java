@@ -2,6 +2,7 @@ package com.tarea.practica10.entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Equipo implements Serializable {
@@ -28,13 +29,10 @@ public class Equipo implements Serializable {
 
     private int cantidad;
 
-    @ManyToOne
-    private Alquiler alquiler;
-
     public Equipo() {
     }
 
-    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean disponible, Boolean activo, int cantidad, Alquiler alquiler) {
+    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean disponible, Boolean activo, int cantidad) {
         this.nombre = nombre;
         this.tarifa = tarifa;
         this.foto = foto;
@@ -43,7 +41,6 @@ public class Equipo implements Serializable {
         this.disponible = disponible;
         this.activo = activo;
         this.cantidad = cantidad;
-        this.alquiler = alquiler;
     }
 
     public Long getId() {
@@ -92,14 +89,6 @@ public class Equipo implements Serializable {
 
     public void setSubFamilia(String subFamilia) {
         this.subFamilia = subFamilia;
-    }
-
-    public Alquiler getAlquiler() {
-        return alquiler;
-    }
-
-    public void setAlquiler(Alquiler alquiler) {
-        this.alquiler = alquiler;
     }
 
     public Boolean getDisponible() {

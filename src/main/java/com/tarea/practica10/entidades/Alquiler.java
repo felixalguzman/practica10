@@ -20,21 +20,24 @@ public class Alquiler implements Serializable {
     private Cliente cliente;
 
     @OneToMany
-    private Set<Equipo> equipoSet;
+    private Set<EquipoAlquiler> equipoAlquiler;
 
     private Boolean pendiente;
+
+    private int cantidadEquipos;
 
     private int costo;
 
     public Alquiler() {
     }
 
-    public Alquiler(Date fecha, Date fechaEntrega, Cliente cliente, Set<Equipo> equipoSet, Boolean pendiente, int costo) {
+    public Alquiler(Date fecha, Date fechaEntrega, Cliente cliente, Set<EquipoAlquiler> equipoAlquiler, Boolean pendiente, int cantidadEquipos, int costo) {
         this.fecha = fecha;
         this.fechaEntrega = fechaEntrega;
         this.cliente = cliente;
-        this.equipoSet = equipoSet;
+        this.equipoAlquiler = equipoAlquiler;
         this.pendiente = pendiente;
+        this.cantidadEquipos = cantidadEquipos;
         this.costo = costo;
     }
 
@@ -70,20 +73,12 @@ public class Alquiler implements Serializable {
         this.cliente = cliente;
     }
 
-    public Set<Equipo> getEquipoSet() {
-        return equipoSet;
+    public Set<EquipoAlquiler> getEquipoAlquiler() {
+        return equipoAlquiler;
     }
 
-    public void setEquipoSet(Set<Equipo> equipoSet) {
-        this.equipoSet = equipoSet;
-    }
-
-    public int getCosto() {
-        return costo;
-    }
-
-    public void setCosto(int costo) {
-        this.costo = costo;
+    public void setEquipoAlquiler(Set<EquipoAlquiler> equipoAlquiler) {
+        this.equipoAlquiler = equipoAlquiler;
     }
 
     public Boolean getPendiente() {
@@ -92,5 +87,21 @@ public class Alquiler implements Serializable {
 
     public void setPendiente(Boolean pendiente) {
         this.pendiente = pendiente;
+    }
+
+    public int getCantidadEquipos() {
+        return cantidadEquipos;
+    }
+
+    public void setCantidadEquipos(int cantidadEquipos) {
+        this.cantidadEquipos = cantidadEquipos;
+    }
+
+    public int getCosto() {
+        return costo;
+    }
+
+    public void setCosto(int costo) {
+        this.costo = costo;
     }
 }
