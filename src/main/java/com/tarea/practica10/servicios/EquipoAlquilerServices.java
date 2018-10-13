@@ -37,6 +37,11 @@ public class EquipoAlquilerServices {
         return equipoList;
     }
 
+    public EquipoAlquiler buscarEquipoAlquilerById(long id){
+
+        return equipoAlquilerRepository.findById(id);
+    }
+
 
     public void devolverEquipo(long id){
 

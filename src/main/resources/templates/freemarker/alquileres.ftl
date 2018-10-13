@@ -252,6 +252,7 @@ immediately after the control sidebar -->
                             <label for="fechaEntregaFactura">Fecha Entrega</label>
                             <input type="date" id="fechaEntregaFactura" disabled>
 
+                            <input hidden id="alquilerEquipo">
 
                         </div>
 
@@ -340,17 +341,35 @@ immediately after the control sidebar -->
 
         });
 
+        $('#total').bind('input', function() {
+
+            document.getElementById('total').removeAttribute("style");
+
+        });
+
         $("#facturar").on("click", function (e) {
             //
             //
             e.preventDefault();
 
+            if ($('#total').val() === "") {
 
-            $("#factura")[0].reset();
+                document.getElementById('total').style.border = '1px solid red';
+
+                alert("El total es obligatorio!");
+                document.getElementById("total").focus();
+
+            } else {
+
+                facturar();
+
+                $("#factura")[0].reset();
+
+            }
 
         });
 
-        $(document).on('click', '.btnDevolver' , function (e) {
+        $(document).on('click', '.btnDevolver', function (e) {
             e.preventDefault();
         });
 
@@ -641,7 +660,6 @@ immediately after the control sidebar -->
         return total + num;
     }
 
-
     function actualizarAlquileres(json) {
 
         console.log("en tabla:", json);
@@ -659,7 +677,7 @@ immediately after the control sidebar -->
                     targets: -1,
                     data: 'id',
                     "render": function (data, type, row, meta) {
-                        return ' &nbsp' + ' <button class="btn btn-secondary btn-sm" id=alquiler_' + data + ' onclick="facturar(this.id)"><i class="fa fa-file-text-o"></i>  Facturar</button>'
+                        return ' &nbsp' + ' <button class="btn btn-secondary btn-sm" id=alquiler_' + data + ' onclick="modalFactura(this.id)"><i class="fa fa-file-text-o"></i>  Facturar</button>'
                     },
                     // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                     // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -685,7 +703,7 @@ immediately after the control sidebar -->
         // alquileres.columns.adjust().draw();
     }
 
-    function facturar(id) {
+    function modalFactura(id) {
 
         let num = id.replace('alquiler_', '');
 
@@ -698,6 +716,7 @@ immediately after the control sidebar -->
 
                 $("#clienteFactura").val(data.cliente.nombre);
                 $("#fechaEntregaFactura").val(data.fechaEntrega);
+                $('#alquilerEquipo').val(data.id);
 
 
                 console.log(data);
@@ -746,7 +765,7 @@ immediately after the control sidebar -->
         let data = [{id: num}];
 
         let request = new XMLHttpRequest();
-        request.open('POST', '/alquiler/devolver/'+num, true);
+        request.open('POST', '/alquiler/devolver/' + num, true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(data);
 
@@ -759,7 +778,7 @@ immediately after the control sidebar -->
             destroy: true,
             dom: 'Bfrtip',
             data: nuevo,
-            responsive:true,
+            responsive: true,
             columns: [
                 {targets: 0, data: 'alquiler', visible: false},
                 {targets: 1, data: 'nombre', defaultContent: ""},
@@ -813,6 +832,21 @@ immediately after the control sidebar -->
 
 
         $('#modalFactura').modal('toggle');
+
+    }
+
+    function facturar() {
+
+        let data =$('#alquilerEquipo').val() + ':' + $("#total").val();
+        let request = new XMLHttpRequest();
+        request.open('POST', '/factura/crear', true);
+        request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        request.send(data);
+
+        buscarAlquileres();
+        $('#modalFactura').modal('toggle');
+
+
 
     }
 
