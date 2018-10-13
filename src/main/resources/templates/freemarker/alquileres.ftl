@@ -843,8 +843,11 @@ immediately after the control sidebar -->
         request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         request.send(data);
 
-        buscarAlquileres();
-        $('#modalFactura').modal('toggle');
+        setTimeout(function () {
+
+            $('#modalFactura').modal('toggle');
+            buscarAlquileres();
+        },200);
 
 
 
