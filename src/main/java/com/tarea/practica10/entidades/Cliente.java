@@ -18,12 +18,12 @@ public class Cliente implements Serializable {
     private String nombre;
 
     private String cedula;
-    @Column(nullable = true)
-    private int telefono;
+    @Column()
+    private long telefono;
     @Column(nullable = true)
     private String correo;
 
-    @Column(nullable = true, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String foto;
 
     private Boolean activo;
@@ -68,11 +68,11 @@ public class Cliente implements Serializable {
         this.cedula = cedula;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 

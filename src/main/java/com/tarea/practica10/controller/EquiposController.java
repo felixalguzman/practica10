@@ -68,4 +68,6 @@ public class EquiposController {
         return new ResponseEntity<>(id, HttpStatus.OK);
 
     }
+
+
 }

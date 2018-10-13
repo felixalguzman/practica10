@@ -4,10 +4,7 @@ import com.tarea.practica10.entidades.Alquiler;
 import com.tarea.practica10.entidades.Cliente;
 import com.tarea.practica10.entidades.Equipo;
 import com.tarea.practica10.entidades.EquipoAlquiler;
-import com.tarea.practica10.servicios.AlquilerParametro;
-import com.tarea.practica10.servicios.AlquilerServices;
-import com.tarea.practica10.servicios.ClienteServices;
-import com.tarea.practica10.servicios.EquipoServices;
+import com.tarea.practica10.servicios.*;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,9 @@ public class AlquilerController {
 
     @Autowired
     EquipoServices equipoServices;
+
+    @Autowired
+    EquipoAlquilerServices equipoAlquilerServices;
 
 
     @RequestMapping("/index/alquileres")
@@ -116,6 +116,18 @@ public class AlquilerController {
     public Alquiler buscarAlquiler(@PathVariable(value = "id") long id){
 
         return alquilerServices.buscarAlquiler(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/alquiler/devolver/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Long> devolverEquipo(@PathVariable(value = "id") long id) {
+
+
+
+        equipoAlquilerServices.devolverEquipo(id);
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
+
     }
 
 }

@@ -1,10 +1,7 @@
 package com.tarea.practica10.entidades;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -17,12 +14,19 @@ public class EquipoAlquiler implements Serializable {
     @OneToOne
     private Equipo equipo;
 
+    private int cantidad;
+
+    @Column(columnDefinition = "Boolean default true")
+    private Boolean devuelto;
+
 
     public EquipoAlquiler() {
     }
 
-    public EquipoAlquiler(Equipo equipo) {
+    public EquipoAlquiler(Equipo equipo, int cantidad, Boolean devuelto) {
         this.equipo = equipo;
+        this.cantidad = cantidad;
+        this.devuelto = devuelto;
     }
 
     public Long getId() {
@@ -39,5 +43,21 @@ public class EquipoAlquiler implements Serializable {
 
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Boolean getDevuelto() {
+        return devuelto;
+    }
+
+    public void setDevuelto(Boolean devuelto) {
+        this.devuelto = devuelto;
     }
 }

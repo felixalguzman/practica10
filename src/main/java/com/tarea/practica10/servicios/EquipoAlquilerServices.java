@@ -36,4 +36,13 @@ public class EquipoAlquilerServices {
 
         return equipoList;
     }
+
+
+    public void devolverEquipo(long id){
+
+        EquipoAlquiler equipoAlquiler = equipoAlquilerRepository.findById(id);
+        equipoAlquiler.setDevuelto(!equipoAlquiler.getDevuelto());
+        equipoAlquilerRepository.save(equipoAlquiler);
+
+    }
 }

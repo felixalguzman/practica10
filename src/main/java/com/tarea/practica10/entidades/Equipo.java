@@ -21,8 +21,6 @@ public class Equipo implements Serializable {
     private String familia;
 
     private String subFamilia;
-    @Column(columnDefinition = "Boolean default true")
-    private Boolean devuelto;
 
     private Boolean activo;
 
@@ -31,13 +29,12 @@ public class Equipo implements Serializable {
     public Equipo() {
     }
 
-    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean devuelto, Boolean activo, int cantidad) {
+    public Equipo(String nombre, int tarifa, String foto, String familia, String subFamilia, Boolean activo, int cantidad) {
         this.nombre = nombre;
         this.tarifa = tarifa;
         this.foto = foto;
         this.familia = familia;
         this.subFamilia = subFamilia;
-        this.devuelto = devuelto;
         this.activo = activo;
         this.cantidad = cantidad;
     }
@@ -88,14 +85,6 @@ public class Equipo implements Serializable {
 
     public void setSubFamilia(String subFamilia) {
         this.subFamilia = subFamilia;
-    }
-
-    public Boolean getDevuelto() {
-        return devuelto;
-    }
-
-    public void setDevuelto(Boolean devuelto) {
-        this.devuelto = devuelto;
     }
 
     public Boolean getActivo() {
