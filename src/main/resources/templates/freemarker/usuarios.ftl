@@ -534,7 +534,7 @@
         function crearUsuario() {
 
 
-            let json = []
+            let json = [];
 
             console.log($("#permisos").val());
             let rol = [];

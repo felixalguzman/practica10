@@ -47,13 +47,13 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-                <div class="col-xs-6">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox" style="padding-left: 5px"> Recordar
-                        </label>
-                    </div>
-                </div>
+                <#--<div class="col-xs-6">-->
+                    <#--<div class="checkbox icheck">-->
+                        <#--<label>-->
+                            <#--<input type="checkbox" style="padding-left: 5px"> Recordar-->
+                        <#--</label>-->
+                    <#--</div>-->
+                <#--</div>-->
                 <!-- /.col -->
                 <div class="col-xs-6">
                     <button type="submit" id="LogIn" class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
@@ -65,8 +65,8 @@
 
         <!-- /.social-auth-links -->
 
-        <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <#--<a href="#">I forgot my password</a><br>-->
+        <#--<a href="register.html" class="text-center">Register a new membership</a>-->
 
     </div>
     <!-- /.login-box-body -->
