@@ -28,24 +28,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <!--<link rel="stylesheet" type="text/css" href="../SemanticUI-2.2.13/semantic.min.css"/>-->
-    <link rel="stylesheet" type="text/css" href="../DataTables-1.10.18/css/dataTables.jqueryui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../Responsive-2.2.2/css/responsive.semanticui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../Select-1.2.6/css/select.semanticui.min.css"/>
 
-    <!--<script type="text/javascript" src="../SemanticUI-2.2.13/semantic.min.js"></script>-->
-    <script type="text/javascript" src="../DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-    <!--<script type="text/javascript" src="../DataTables-1.10.18/js/dataTables.semanticui.min.js"></script>-->
-    <script type="text/javascript" src="../Responsive-2.2.2/js/dataTables.responsive.min.js"></script>
-    <!--<script type="text/javascript" src="../Responsive-2.2.2/js/responsive.semanticui.min.js"></script>-->
-    <script type="text/javascript" src="../Select-1.2.6/js/dataTables.select.min.js"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -75,10 +63,22 @@
                 <div class="col-xs-12">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Reportes</h3>
+                            <h3 class="box-title">Promedio de días alquilados de equipos por familia y subfamila</h3>
                         </div>
 
-                        <div id="chart"></div>
+                        <div id="graficoEquipos"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-default">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Alquileres por clientes</h3>
+                        </div>
+
+                        <div id="graficoClientes"></div>
                     </div>
                 </div>
             </div>
@@ -238,11 +238,149 @@ immediately after the control sidebar -->
     $(document).ready(function () {
 
 
-
-
+        crearGrafico();
+        crearGraficoClientes();
 
 
     });
+
+    function crearGraficoClientes() {
+
+        let series = [];
+        $.ajax({
+            type: 'GET',
+            url: '/reporte/alquiler',
+            success: function (resp) {
+
+                console.log(resp);
+                graficoCliente(resp);
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function graficoCliente(data) {
+
+        let options = {
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
+            series: [{
+                data: data.map(a => a.CANTIDAD)
+            }],
+            xaxis: {
+                categories: data.map(b => buscarCliente(b.CLIENTE)),
+            },
+
+
+        };
+
+        console.log(options);
+
+
+        let chart = new ApexCharts(document.querySelector("#graficoClientes"), options);
+
+        chart.render();
+    }
+
+    function buscarCliente(id) {
+
+        let nombre = "";
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/cliente/'+id,
+            success: function (resp) {
+
+                console.log(resp.nombre);
+                nombre = resp.nombre;
+                // return resp.nombre;
+
+            },
+            error: function () {
+
+            }
+        });
+
+        return nombre;
+
+
+    }
+
+    function crearGrafico() {
+
+
+
+        $.ajax({
+            type: 'GET',
+            url: '/reporte/equipos',
+            success: function (resp) {
+
+                crearGraficoEquipos(resp);
+
+            },
+            error: function () {
+
+            }
+        });
+
+
+    }
+
+    function crearGraficoEquipos(resp) {
+        let series = [];
+        resp.forEach(function (res) {
+
+            series.push({
+                name: obtenerNombres(res),
+                data: [res.PROMEDIO]
+            });
+
+
+
+        });
+
+        let options = {
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
+            series: series,
+            xaxis: {
+                categories: resp.map(a => a.FAMILIA + ' ' + a.SUBFAMILIA),
+            },
+            tooltip:{
+                y:{
+
+                    formatter: function (val) {
+                        return  val + " días"
+                    }
+                }
+            }
+
+        };
+
+        console.log(options);
+
+
+        let chart = new ApexCharts(document.querySelector("#graficoEquipos"), options);
+
+        chart.render();
+    }
+
+    function obtenerNombres(arr) {
+
+        return arr.FAMILIA + ' ' + arr.SUBFAMILIA;
+    }
+
+    function obtenerValores(arr) {
+
+        return arr.PROMEDIO;
+    }
 
 </script>
 
@@ -251,7 +389,7 @@ immediately after the control sidebar -->
 <script src="/webjars/AdminLTE/2.4.0/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/webjars/AdminLTE/2.4.0/dist/js/adminlte.min.js"></script>
-<script src="../js/apexcharts.min.js"></script>
+
 </body>
 
 </html>

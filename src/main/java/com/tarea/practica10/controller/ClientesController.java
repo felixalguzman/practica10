@@ -47,6 +47,12 @@ public class ClientesController {
         return clienteServices.listaClientes();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/cliente/{id}", produces = {"application/json"})
+    public Cliente buscarCliente(@PathVariable(value = "id") long id) {
+        return clienteServices.buscarCliente(id);
+    }
+
     @RequestMapping(value = "/cliente/eliminar/{id}", method = RequestMethod.POST)
     public ResponseEntity<Long> eliminarCliente(@PathVariable(value = "id") long id) {
 

@@ -1,10 +1,12 @@
 package com.tarea.practica10.controller;
 
 import com.tarea.practica10.entidades.Alquiler;
+import com.tarea.practica10.entidades.Equipo;
 import com.tarea.practica10.entidades.EquipoAlquiler;
 import com.tarea.practica10.entidades.Factura;
 import com.tarea.practica10.servicios.AlquilerServices;
 import com.tarea.practica10.servicios.EquipoAlquilerServices;
+import com.tarea.practica10.servicios.EquipoServices;
 import com.tarea.practica10.servicios.FacturaServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ public class FacturaController {
     @Autowired
     AlquilerServices alquilerServices;
 
+    @Autowired
+    EquipoServices equipoServices;
+
     @RequestMapping("/index/facturas")
     public String index(Model model) {
         model.addAttribute("titulo", "Facturas");
@@ -42,12 +47,19 @@ public class FacturaController {
     }
 
     @RequestMapping(value = "/factura/crear", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<String> crearAlquiler(@RequestBody String facturaAlquiler) {
+    public ResponseEntity<String> crearFactura(@RequestBody String facturaAlquiler) {
 
         String[] parte = facturaAlquiler.split(":");
 
         Alquiler alquiler = alquilerServices.buscarAlquiler(Integer.parseInt(parte[0]));
         alquiler.setPendiente(false);
+
+        for (EquipoAlquiler equipoAlquiler: alquiler.getEquipoAlquiler()){
+
+            Equipo equipo = equipoAlquiler.getEquipo();
+            equipo.setCantidad(equipo.getCantidad() + alquiler.getCantidadEquipos());
+            equipoServices.crearEquipo(equipo);
+        }
         alquilerServices.crearAlquiler(alquiler);
 
         Factura factura = new Factura();
