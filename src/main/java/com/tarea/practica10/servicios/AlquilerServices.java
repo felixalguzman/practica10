@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AlquilerServices {
@@ -33,6 +34,14 @@ public class AlquilerServices {
     public Alquiler buscarAlquiler(long id){
 
         return alquilerRepository.findById(id);
+    }
+
+    public List<Map<Long, Long>> reporteAlquiler(){
+        return alquilerRepository.reporteCliente();
+    }
+
+    public  List<Map<String, Map.Entry<String, Boolean>>> reporteEquipos(){
+        return alquilerRepository.reporteEquipo();
     }
 
 

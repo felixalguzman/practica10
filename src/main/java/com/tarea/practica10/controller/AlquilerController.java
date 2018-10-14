@@ -20,10 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class AlquilerController {
@@ -78,7 +75,8 @@ public class AlquilerController {
         Date fechaEntrega;
         try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-dd-mm");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-mm-dd");
+            sdf1.setLenient(false);
             java.util.Date date = sdf1.parse(alquilerParametro.getFechaEntrega());
             fechaEntrega = new java.sql.Date(date.getTime());
         } catch (ParseException e) {
@@ -111,11 +109,33 @@ public class AlquilerController {
 
     }
 
+
     @ResponseBody
     @RequestMapping(value = "/alquiler/buscar/{id}", method = RequestMethod.GET)
     public Alquiler buscarAlquiler(@PathVariable(value = "id") long id){
 
         return alquilerServices.buscarAlquiler(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/reporte/alquiler", produces = {"application/json"})
+    public List<Map<Long, Long>> reporteCliente(){
+
+        return alquilerServices.reporteAlquiler();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/reporte/equipos", produces = {"application/json"})
+    public  List<Map<String, Map.Entry<String, Boolean>>> reporteEquipos(){
+
+        return alquilerServices.reporteEquipos();
+    }
+
+
+    @RequestMapping(value = "/index/alquiler/reportes", method = RequestMethod.GET)
+    public String reportesAlquileres(){
+
+        return "/freemarker/reportes";
     }
 
     @ResponseBody
