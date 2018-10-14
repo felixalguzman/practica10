@@ -61,7 +61,7 @@
 
         <section class="content-header">
             <h1>
-                Clientes
+                ${titulo_clientes}
 
             </h1>
 
@@ -75,12 +75,12 @@
                 <div class="col-xs-12">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Clientes</h3>
+                            <h3 class="box-title">${titulo_clientes}</h3>
                         </div>
                         <div class="box-body">
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                     data-target="#modal-default">
-                                <i class="fa fa-plus-square"></i> Crear
+                                <i class="fa fa-plus-square"></i> ${boton_crear}
                             </button>
 
                             <br>
@@ -88,22 +88,22 @@
 
                                 <thead>
                                 <tr>
-                                    <th>Cedula</th>
-                                    <th>Foto</th>
-                                    <th>Nombre</th>
-                                    <th>Telefono</th>
-                                    <th>Correo</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_cedula}</th>
+                                    <th>${tabla_foto}</th>
+                                    <th>${tabla_nombre}</th>
+                                    <th>${tabla_telefono}</th>
+                                    <th>${tabla_correo}</th>
+                                    <th>${tabla_acciones}</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Cedula</th>
-                                    <th>Foto</th>
-                                    <th>Nombre</th>
-                                    <th>Telefono</th>
-                                    <th>Correo</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_cedula}</th>
+                                    <th>${tabla_foto}</th>
+                                    <th>${tabla_nombre}</th>
+                                    <th>${tabla_telefono}</th>
+                                    <th>${tabla_correo}</th>
+                                    <th>${tabla_acciones}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -326,39 +326,39 @@ immediately after the control sidebar -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nuevo Cliente</h4>
+                <h4 class="modal-title">${nuevo_cliente}</h4>
             </div>
             <form id="form" method="POST">
                 <div class="modal-body">
 
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="cedula">Cedula</label>
-                            <input type="text" name="cedula" class="form-control" id="cedula" placeholder="Cedula"
+                            <label for="cedula">${tabla_cedula}</label>
+                            <input type="text" name="cedula" class="form-control" id="cedula" placeholder="${tabla_cedula}"
                                    required>
                         </div>
 
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                            <label for="nombre">${tabla_nombre}</label>
+                            <input type="text" name="nombre" class="form-control" id="nombre" placeholder="${tabla_nombre}"
                                    required>
                         </div>
 
                         <div class="form-group">
-                            <label for="telefono">Telefono</label>
-                            <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="Telefono"
+                            <label for="telefono">${tabla_telefono}</label>
+                            <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="${tabla_telefono}"
                                    required>
 
 
                         </div>
                         <div class="form-group">
-                            <label for="correo">Correo</label>
-                            <input type="email" class="form-control" name="correo" id="correo" placeholder="Correo"
+                            <label for="correo">${tabla_correo}</label>
+                            <input type="email" class="form-control" name="correo" id="correo" placeholder="${tabla_correo}"
                             >
                         </div>
 
                         <div class="form-group">
-                            <label for="foto">Foto</label>
+                            <label for="foto">${tabla_foto}</label>
                             <input type="file" name="file" id="file" accept="image/*">
                         </div>
                         <input type="text" hidden id="foto">
@@ -372,7 +372,7 @@ immediately after the control sidebar -->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">${boton_cerrar}</button>
                     <button type="submit" id="guardar" class="btn btn-primary">OK</button>
                 </div>
 
@@ -489,7 +489,7 @@ immediately after the control sidebar -->
                     targets: -1,
                     data: 'id',
                     "render": function (data, type, row, meta) {
-                        return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button> &nbsp' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+                        return ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> ${boton_eliminar}</button>'
                     },
                     // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                     // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -504,7 +504,7 @@ immediately after the control sidebar -->
                     next: "Siguiente"
                 },
                 emptyTable: "No hay datos disponibles",
-                info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+                info: "${mostrando} _START_ ${a} _END_ ${de} _TOTAL_ ${registros}",
             },
             autoWidth: true
 

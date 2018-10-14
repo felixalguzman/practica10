@@ -73,7 +73,7 @@
 
         <section class="content-header">
             <h1>
-            ${titulo}
+            ${titulo_alquileres}
 
             </h1>
 
@@ -87,12 +87,12 @@
                 <div class="col-xs-12">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">${titulo}</h3>
+                            <h3 class="box-title">  ${titulo_alquileres}</h3>
                         </div>
                         <div class="box-body">
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                     data-target="#modal-default">
-                                <i class="fa fa-plus-square"></i> Crear
+                                <i class="fa fa-plus-square"></i> ${boton_crear}
                             </button>
 
                             <br>
@@ -100,18 +100,18 @@
 
                                 <thead>
                                 <tr>
-                                    <th>Fecha Entrega</th>
-                                    <th>Cliente</th>
-                                    <th>Cantidad Equipos</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_fecha_entrega}</th>
+                                    <th>${tabla_cliente}</th>
+                                    <th>${tabla_cantidad_equipos}</th>
+                                    <th>${tabla_acciones}</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Fecha Entrega</th>
-                                    <th>Cliente</th>
-                                    <th>Cantidad Equipos</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_fecha_entrega}</th>
+                                    <th>${tabla_cliente}</th>
+                                    <th>${tabla_cantidad_equipos}</th>
+                                    <th>${tabla_acciones}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -148,7 +148,7 @@ immediately after the control sidebar -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nuevo Alquiler</h4>
+                <h4 class="modal-title">${nuevo_alquiler}</h4>
             </div>
             <form id="form" method="POST">
                 <div class="modal-body">
@@ -156,7 +156,7 @@ immediately after the control sidebar -->
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="cliente">Cliente</label>
+                            <label for="cliente">${tabla_cliente}</label>
 
 
                             <select name="cliente" style="width: 50%" class="form-control" id="cliente" required>
@@ -167,12 +167,12 @@ immediately after the control sidebar -->
 
 
                         <div class="form-group">
-                            <label for="fechaEntrega">Fecha Entrega</label>
+                            <label for="fechaEntrega">${tabla_fecha_entrega}</label>
                             <input type="date" name="fechaEntrega" id="fechaEntrega" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="equipos">Equipos</label>
+                            <label for="equipos">${titulo_equipos}</label>
 
 
                             <select name="equipos" style="width: 100%" id="equipos" multiple="multiple"
@@ -187,24 +187,24 @@ immediately after the control sidebar -->
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Foto</th>
-                                <th>Tarifa</th>
-                                <th>Familia</th>
-                                <th>Sub Familia</th>
-                                <th>Cantidad</th>
+                                <th>${tabla_nombre}</th>
+                                <th>${tabla_foto}</th>
+                                <th>${tabla_tarifa}</th>
+                                <th>${tabla_familia}</th>
+                                <th>${tabla_subFamilia}</th>
+                                <th>${tabla_cantidad}</th>
 
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Foto</th>
-                                <th>Tarifa</th>
-                                <th>Familia</th>
-                                <th>Sub Familia</th>
-                                <th>Cantidad</th>
+                                <th>${tabla_nombre}</th>
+                                <th>${tabla_foto}</th>
+                                <th>${tabla_tarifa}</th>
+                                <th>${tabla_familia}</th>
+                                <th>${tabla_subFamilia}</th>
+                                <th>${tabla_cantidad}</th>
 
                             </tr>
                             </tfoot>
@@ -217,7 +217,7 @@ immediately after the control sidebar -->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">${boton_cerrar}</button>
                     <button type="submit" id="guardar" class="btn btn-primary">OK</button>
                 </div>
 
@@ -237,7 +237,7 @@ immediately after the control sidebar -->
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Factura</h4>
+                    <h4 class="modal-title">${titulo_factura}</h4>
                 </div>
 
                 <div class="modal-body">
@@ -246,10 +246,10 @@ immediately after the control sidebar -->
 
 
                         <div class="form-group">
-                            <label for="clienteFactura">Cliente</label>
+                            <label for="clienteFactura">${tabla_cliente}</label>
                             <input id="clienteFactura" disabled>
 
-                            <label for="fechaEntregaFactura">Fecha Entrega</label>
+                            <label for="fechaEntregaFactura">${tabla_fecha_entrega}</label>
                             <input type="date" id="fechaEntregaFactura" disabled>
 
                             <input hidden id="alquilerEquipo">
@@ -257,8 +257,8 @@ immediately after the control sidebar -->
                         </div>
 
                         <div class="form-group">
-                            <label for="total">Total</label>
-                            <input id="total" type="number" name="total" placeholder="Cantidad a cobrar">
+                            <label for="total">${titulo_total}</label>
+                            <input id="total" type="number" name="total">
                         </div>
 
                         <div class="">
@@ -267,30 +267,30 @@ immediately after the control sidebar -->
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Foto</th>
-                                    <th>Tarifa</th>
-                                    <th>Familia</th>
-                                    <th>Sub Familia</th>
-                                    <th>Cantidad</th>
+                                    <th>${tabla_nombre}</th>
+                                    <th>${tabla_foto}</th>
+                                    <th>${tabla_tarifa}</th>
+                                    <th>${tabla_familia}</th>
+                                    <th>${tabla_subFamilia}</th>
+                                    <th>${tabla_cantidad}</th>
                                     <th>Boolean</th>
-                                    <th>Devuelto</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_devuelto}</th>
+                                    <th>${tabla_acciones}</th>
 
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Foto</th>
-                                    <th>Tarifa</th>
-                                    <th>Familia</th>
-                                    <th>Sub Familia</th>
-                                    <th>Cantidad</th>
+                                    <th>${tabla_nombre}</th>
+                                    <th>${tabla_foto}</th>
+                                    <th>${tabla_tarifa}</th>
+                                    <th>${tabla_familia}</th>
+                                    <th>${tabla_subFamilia}</th>
+                                    <th>${tabla_cantidad}</th>
                                     <th>Boolean</th>
-                                    <th>Devuelto</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_devuelto}</th>
+                                    <th>${tabla_acciones}</th>
 
                                 </tr>
                                 </tfoot>
@@ -303,8 +303,8 @@ immediately after the control sidebar -->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" id="facturar" class="btn btn-primary">Facturar</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">${boton_cerrar}</button>
+                    <button type="submit" id="facturar" class="btn btn-primary">${boton_facturar}</button>
                 </div>
 
 
@@ -443,7 +443,7 @@ immediately after the control sidebar -->
         $('#cliente').select2({
 
             // width: 'resolve',
-            placeholder: 'Cliente',
+            placeholder: '${tabla_cliente}',
             // allowClear: true,
             // selectionAdapter: 'SingleSelection',
             ajax: {
@@ -473,7 +473,7 @@ immediately after the control sidebar -->
         $('#equipos').select2({
 
             width: 'resolve',
-            placeholder: 'Equipos',
+            placeholder: '${titulo_equipos}',
             // allowClear: true,
             // templateResult: format,
             // selectionAdapter: 'SingleSelection',
@@ -550,7 +550,7 @@ immediately after the control sidebar -->
                     next: "Siguiente"
                 },
                 emptyTable: "No hay datos disponibles",
-                info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+                info: "${mostrando} _START_ ${a} _END_ ${de} _TOTAL_ ${registros}",
             },
             autoWidth: true
 
@@ -677,7 +677,7 @@ immediately after the control sidebar -->
                     targets: -1,
                     data: 'id',
                     "render": function (data, type, row, meta) {
-                        return ' &nbsp' + ' <button class="btn btn-secondary btn-sm" id=alquiler_' + data + ' onclick="modalFactura(this.id)"><i class="fa fa-file-text-o"></i>  Facturar</button>'
+                        return ' &nbsp' + ' <button class="btn btn-secondary btn-sm" id=alquiler_' + data + ' onclick="modalFactura(this.id)"><i class="fa fa-file-text-o"></i>  ${boton_facturar}</button>'
                     },
                     // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                     // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -693,7 +693,7 @@ immediately after the control sidebar -->
                     next: "Siguiente"
                 },
                 emptyTable: "No hay datos disponibles",
-                info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+                info: "${mostrando} _START_ ${a} _END_ ${de} _TOTAL_ ${registros}",
             },
             autoWidth: true
 
@@ -824,7 +824,7 @@ immediately after the control sidebar -->
                     next: "Siguiente"
                 },
                 emptyTable: "No hay datos disponibles",
-                info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+                info: "${mostrando} _START_ ${a} _END_ ${de} _TOTAL_ ${registros}",
             },
             autoWidth: true
 

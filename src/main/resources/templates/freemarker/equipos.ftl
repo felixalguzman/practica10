@@ -75,12 +75,12 @@
                 <div class="col-xs-12">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Equipos</h3>
+                            <h3 class="box-title">${titulo_equipos}</h3>
                         </div>
                         <div class="box-body">
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                     data-target="#modal-default">
-                                <i class="fa fa-plus-square"></i> Crear
+                                <i class="fa fa-plus-square"></i> ${boton_crear}
                             </button>
 
                             <br>
@@ -88,24 +88,24 @@
 
                                 <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Foto</th>
-                                    <th>Tarifa</th>
-                                    <th>Familia</th>
-                                    <th>Sub Familia</th>
-                                    <th>Cantidad</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_nombre}</th>
+                                    <th>${tabla_foto}</th>
+                                    <th>${tabla_tarifa}</th>
+                                    <th>${tabla_familia}</th>
+                                    <th>${tabla_subFamilia}</th>
+                                    <th>${tabla_cantidad}</th>
+                                    <th>${tabla_acciones}</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Foto</th>
-                                    <th>Tarifa</th>
-                                    <th>Familia</th>
-                                    <th>Sub Familia</th>
-                                    <th>Cantidad</th>
-                                    <th>Acciones</th>
+                                    <th>${tabla_nombre}</th>
+                                    <th>${tabla_foto}</th>
+                                    <th>${tabla_tarifa}</th>
+                                    <th>${tabla_familia}</th>
+                                    <th>${tabla_subFamilia}</th>
+                                    <th>${tabla_cantidad}</th>
+                                    <th>${tabla_acciones}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -328,7 +328,7 @@ immediately after the control sidebar -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nuevo Equipo</h4>
+                <h4 class="modal-title">${nuevo_equipo}</h4>
             </div>
             <form id="form" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -336,40 +336,40 @@ immediately after the control sidebar -->
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                            <label for="nombre">${tabla_nombre}</label>
+                            <input type="text" name="nombre" class="form-control" id="nombre" placeholder="${tabla_nombre}"
                                    required>
                         </div>
                         <div class="form-group">
-                            <label for="tarifa">Tarifa</label>
-                            <input type="text" name="tarifa" class="form-control" id="tarifa" placeholder="Tarifa"
-                                   required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="familia">Familia</label>
-                            <input type="text" class="form-control" name="familia" id="familia" placeholder="Familia"
+                            <label for="tarifa">${tabla_tarifa}</label>
+                            <input type="text" name="tarifa" class="form-control" id="tarifa" placeholder="${tabla_tarifa}"
                                    required>
                         </div>
 
                         <div class="form-group">
-                            <label for="subFamilia">Sub Familia</label>
+                            <label for="familia">${tabla_familia}</label>
+                            <input type="text" class="form-control" name="familia" id="familia" placeholder="${tabla_familia}"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subFamilia">${tabla_subFamilia}</label>
                             <input type="text" class="form-control" name="subFamilia" id="subFamilia"
-                                   placeholder="Sub Familia">
+                                   placeholder="${tabla_subFamilia}">
                         </div>
 
                         <div class="form-group">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="number" name="cantidad" id="cantidad" min="0" placeholder="Cantidad" required>
+                            <label for="cantidad">${tabla_cantidad}</label>
+                            <input type="number" name="cantidad" id="cantidad" min="0" placeholder="${tabla_cantidad}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="devuelto">Disponible</label>
-                            <input type="checkbox" name="devuelto" id="devuelto" placeholder="Disponible">
+                            <label for="devuelto">${disponible}</label>
+                            <input type="checkbox" name="devuelto" id="devuelto" placeholder="${disponible}">
                         </div>
 
                         <div class="form-group">
-                            <label for="foto">Foto</label>
+                            <label for="foto">${tabla_foto}</label>
                             <input type="file" name="file" id="file" accept="image/*">
                         </div>
                         <input type="text" hidden id="foto">
@@ -383,7 +383,7 @@ immediately after the control sidebar -->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">${boton_cerrar}</button>
                     <button type="submit" id="guardar" class="btn btn-primary">OK</button>
                 </div>
 
@@ -502,7 +502,7 @@ immediately after the control sidebar -->
                     targets: -1,
                     data: 'id',
                     "render": function (data, type, row, meta) {
-                        return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button> &nbsp' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+                        return ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> ${boton_eliminar}</button>'
                     },
                     // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                     // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -517,7 +517,7 @@ immediately after the control sidebar -->
                     next: "Siguiente"
                 },
                 emptyTable: "No hay datos disponibles",
-                info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+                info: "${mostrando} _START_ ${a} _END_ ${de} _TOTAL_ ${registros}",
             },
             autoWidth: true
 

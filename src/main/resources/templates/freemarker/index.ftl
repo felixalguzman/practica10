@@ -49,7 +49,7 @@
                   <span class="info-box-icon bg-aqua"><i class="ion ion-ios-people-outline"></i></span>
       
                   <div class="info-box-content">
-                    <span class="info-box-text">Usuarios</span>
+                    <span class="info-box-text">${titulo_usuarios}</span>
                     <!-- <span class="info-box-number"></span> -->
                   </div>
                   <!-- /.info-box-content -->

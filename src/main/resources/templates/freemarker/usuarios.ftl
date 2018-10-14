@@ -60,7 +60,7 @@
 
                 <section class="content-header">
                     <h1>
-                        Usuarios
+                        ${titulo_usuarios}
 
                     </h1>
 
@@ -74,12 +74,12 @@
                             <div class="col-xs-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Usuarios</h3>
+                                        <h3 class="box-title">${titulo_usuarios}</h3>
                                     </div>
                                     <div class="box-body">
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#modal-default">
-                                            <i class="fa fa-plus-square"></i> Crear
+                                            <i class="fa fa-plus-square"></i> ${boton_crear}
                                         </button>
 
                                         <br>
@@ -87,17 +87,16 @@
 
                                             <thead>
                                                 <tr>
-                                                    <th>Nombre</th>
-                                                    <th>Usuario</th>
-                                                    <th>Acciones</th>
+                                                    <th>${tabla_nombre}</th>
+                                                    <th>${tabla_usuario}</th>
+                                                    <th>${tabla_acciones}</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Nombre</th>
-                                                    <th>Usuario</th>
-                                                    <th>Acciones</th>
-
+                                                    <th>${tabla_nombre}</th>
+                                                    <th>${tabla_usuario}</th>
+                                                    <th>${tabla_acciones}</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -320,33 +319,33 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Nuevo Usuario</h4>
+                    <h4 class="modal-title">${nuevo_usuario}</h4>
                 </div>
                 <form id="form" method="POST">
                     <div class="modal-body">
 
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre"
+                                <label for="nombre">${tabla_nombre}</label>
+                                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="${tabla_nombre}"
                                     required>
                             </div>
                             <div class="form-group">
-                                <label for="usuario">Usuario</label>
-                                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario"
+                                <label for="usuario">${tabla_usuario}</label>
+                                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="${tabla_usuario}"
                                     required>
 
                                 <input type="checkbox" value="checked" hidden name="activo">
 
                             </div>
                             <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
+                                <label for="password">${contra}</label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="${contra}"
                                     required>
                             </div>
 
                             <div class="form-group">
-                                <label for="permisos">Permisos</label>
+                                <label for="permisos">${permisos}</label>
                                 <select name="permisos" style="width: 100%" class="form-control" id="permisos" required
                                     multiple="multiple">
 
@@ -362,7 +361,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">${boton_cerrar}</button>
                         <button type="submit" id="guardar" class="btn btn-primary">OK</button>
                     </div>
 
@@ -421,7 +420,7 @@
             $('#permisos').select2({
 
                 width: 'resolve',
-                placeholder: 'Roles',
+                placeholder: '${permisos}',
                 allowClear: true,
                 ajax: {
                     url: "/roles",
@@ -488,7 +487,7 @@
                         targets: -1,
                         data: 'id',
                         "render": function (data, type, row, meta) {
-                            return '<button class="btn btn-light btn-sm" id=editar_' + data + ' onclick="modalEditar(this.id)"><i class="fa fa-pencil"></i> Editar</button> &nbsp' + ' <button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
+                            return '<button class="btn btn-danger btn-sm" id=eliminar_' + data + ' onclick="eliminar(this.id)"><i class="fa fa-minus"></i> Eliminar</button>'
                         },
                         // defaultContent: "<button id='editar' type=\"button\" class=\"btn btn-light btn-sm\"><i class=\"fa fa-pencil\"></i> Editar</button> " +
                         // "<button id='eliminar' type=\"button\" class=\"btn btn-danger btn-sm\"><i class=\"fa fa-minus\"></i> Eliminar</button>"
@@ -503,7 +502,7 @@
                         next: "Siguiente"
                     },
                     emptyTable: "No hay datos disponibles",
-                    info: "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+                    info: "${mostrando} _START_ ${a} _END_ ${de} _TOTAL_ ${registros}",
                 },
                 autoWidth: true
 
