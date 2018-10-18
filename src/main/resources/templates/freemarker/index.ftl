@@ -59,6 +59,12 @@
             </a>
         </div>
 
+        <div class="row">
+            <div class="callout callout-success">
+                <p>Puerto ${puerto}</p>
+            </div>
+        </div>
+
     </section>
   </div>
 
